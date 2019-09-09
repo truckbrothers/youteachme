@@ -28,4 +28,4 @@ massive(CONNECTION_STRING)
     .then(db => {
         app.set('db', db)
         app.listen(PORT, () => console.log(`Motha truckin' on port ${PORT}`))
-    })
+    });
