@@ -9,7 +9,7 @@ function Register() {
   })
 
   handleChange(e, key) {
-    setState({ key: event.target.value });
+    setState({ [key]: e.target.value });
   }
   //we need to add a function for actually registering the user here referenced on the register button
   return (
