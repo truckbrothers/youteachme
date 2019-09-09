@@ -7,12 +7,13 @@ export default class MentorCheck extends Component {
     }
     render() {
         return (
-            <div className='title'>Would you like to<br></br>
-                <button>Mentor</button><br></br>
-                today, or<br></br>
-                <button>Start Your Learning</button>
+            <div className='wrapper'>
+                <div className='container'>Would you like to<br></br>
+                    <button>Mentor</button><br></br>
+                    Or<br></br>
+                    <button>Start Your Learning</button>
+                </div>
             </div>
-
         )
     }
 };
