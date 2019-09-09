@@ -9,8 +9,8 @@ export default class MentorCheck extends Component {
         return (
             <div className='title'>Would you like to<br></br>
                 <button>Mentor</button><br></br>
-                Today, or<br></br>
-                <button>Start your learning</button>
+                today, or<br></br>
+                <button>Start Your Learning</button>
             </div>
 
         )
