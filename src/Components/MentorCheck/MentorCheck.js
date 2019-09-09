@@ -12,7 +12,7 @@ export default class MentorCheck extends Component {
     render() {
         return (
             <div>
-                
+                <h1>Mentor Check</h1>
             </div>
         )
     }
