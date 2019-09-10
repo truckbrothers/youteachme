@@ -33,7 +33,7 @@ class Landing extends Component {
           this.props.history.push(`/mentor-check`)
         }
         else {
-          this.props.history.push(`/mentor-check`)
+          this.props.history.push(`/feed`)
         }
       })
       .catch(err => { alert('login failed') })
