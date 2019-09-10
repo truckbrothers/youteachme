@@ -3,7 +3,7 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { setUser, logoutUser } from '../../ducks/reducer'
 import { withRouter, Link } from 'react-router-dom'
-import './Nav.css'
+import './nav.css'
 
 class Nav extends Component {
     logout = () => {
