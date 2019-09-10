@@ -1,19 +1,20 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import './mentorcheck.css';
 
 export default class MentorCheck extends Component {
-    constructor() {
-        super()
+    state = {
 
-        this.state = {
-
-        }
     }
-
     render() {
         return (
-            <div>
-                <h1>Mentor Check</h1>
+            <div className='wrapper'>
+                <div className='container'>Would you like to<br></br>
+                    <button>Mentor</button><br></br>
+                    Or<br></br>
+                    <button>Start Your Learning</button>
+                </div>
             </div>
         )
+        
     }
-}
+};
