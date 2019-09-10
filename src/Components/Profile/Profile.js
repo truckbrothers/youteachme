@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import Swal from 'sweetalert2'
+import axios from 'axios'
+import { connect } from 'react-redux'
+import { setUser } from '../../ducks/reducer'
+import { withRouter} from 'react-router-dom'
 import './Profile.css'
 
 class Profile extends Component {
@@ -9,15 +13,30 @@ class Profile extends Component {
 
         }
     }
+    componentDidMount() {
+        console.log(this.props)
+        axios.get('/auth/me').then(res => {
+            if (res.data.user) {
+                const { username, user_image, user_id } = res.data.user
+                this.props.setUser({ username, user_image, user_id })
+            }
+        })
+            .catch(err => { alert(`couldn't find user info`, err) })
+    }
     render() {
         return (
             <div className='profile-page'>
                 <div className='general-section'>
-                    <img src="https://i.pinimg.com/originals/83/1d/fc/831dfc803d8ed73168d9d5212a156932.jpg" />
-                    Test Username
+                    <img
+                            className="user-image"
+                            onClick={() => console.log(this.props)}
+                            src={this.props.user_image}
+                            alt='profile-pic'
+                        />
+                    {this.props.username}
                </div>
                 {/* Render the following component conditionally based on the mentorStatus from the database */}
-                {/* The "thinking of mentoring" section will render if mentorStatus is false */}
+                {/* The thinking of mentoring section will render if mentorStatus is false */}
                 <div className='mentor-section'>
                     <span>Thinking of Mentoring?</span>
                     <button onClick={() => Swal.fire({
@@ -43,4 +62,9 @@ class Profile extends Component {
         )
     }
 }
-export default Profile
+
+function mapStateToProps(reduxState) {
+    const { user_id, username, user_image } = reduxState
+    return { user_id, username, user_image }
+}
+export default connect(mapStateToProps, {setUser})(withRouter(Profile))
