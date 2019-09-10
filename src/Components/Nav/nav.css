@@ -1,0 +1,15 @@
+.user-image {
+    height: 64px;
+    width: 64px;
+    border-radius: 50px;
+}
+.Nav {
+    background-color: rgba(128, 0, 128, 0.5);
+    width: 100px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+.nav-links-hidden {
+    
+}
