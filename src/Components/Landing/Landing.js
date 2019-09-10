@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
-import {setUser} from '../../ducks/reducer'
-import {connect} from 'react-redux'
+import { setUser } from '../../ducks/reducer'
+import { connect } from 'react-redux'
 
 class Landing extends Component {
   constructor() {
@@ -25,10 +25,10 @@ class Landing extends Component {
       usernameInput: username,
       passwordInput: password
     } = this.state
-    axios.post('/auth/login', {username, password})
+    axios.post('/auth/login', { username, password })
       .then(res => {
-        const {username, user_id, user_image} = res.data.user
-        this.props.setUser({ username, user_id, user_image})
+        const { username, user_id, user_image } = res.data.user
+        this.props.setUser({ username, user_id, user_image })
         if (res.data.user.mentor_status === true) {
           this.props.history.push(`/mentor-check`)
         }
@@ -36,7 +36,22 @@ class Landing extends Component {
           this.props.history.push(`/mentor-check`)
         }
       })
-      .catch(err => {alert('login failed')})
+      .catch(err => { alert('login failed') })
+  }
+  register = () => {
+    const {
+      usernameInput: username,
+      passwordInput: password
+    } = this.state
+    axios.post('/auth/register', { username, password, user_image: `https://i.pinimg.com/originals/c6/79/ec/c679ecb1779699dac5edfdbc607eba39.jpg`, mentor_status: false })
+      .then(res => {
+        console.log(res)
+        const { username, user_id, user_image } = res.data.user
+        this.props.setUser({ username, user_id, user_image })
+        this.props.history.push('/feed')
+      }
+      )
+      .catch(err => { alert('register failed', err) })
   }
 
   render() {
@@ -46,23 +61,42 @@ class Landing extends Component {
           <h1>youTeachMe</h1>
         </header>
         <div className="login-input-container">
-          <div>
-            <p>Username:</p>
-            <input
-              onChange={e => this.handleChange(e, "usernameInput")}
-              type="text"
-            />
-            <p>Password:</p>
-            <input
-              onChange={e => this.handleChange(e, "passwordInput")}
-              type="password"
-            />
-            <button onClick={this.login}>login</button>
-          </div>
+          {this.state.register === false ?
+            (
+            <div>
+              <p>Username:</p>
+              <input
+                onChange={e => this.handleChange(e, "usernameInput")}
+                type="text"
+              />
+              <p>Password:</p>
+              <input
+                onChange={e => this.handleChange(e, "passwordInput")}
+                type="password"
+              />
+              <button onClick={this.login}>login</button>
+            </div>) : (
+              
+              <div>
+              <p>Username:</p>
+              <input
+                onChange={e => this.handleChange(e, "usernameInput")}
+                type="text"
+              />
+              <p>Password:</p>
+              <input
+                onChange={e => this.handleChange(e, "passwordInput")}
+                type="password"
+              />
+              <button onClick={this.register}>register</button>
+            </div>
+            
+            )}
+          <button onClick={() => { this.setState({ register: !this.state.register }) }}>{this.state.register === false ? 'register' : 'cancel'}</button>
         </div>
       </div>
     );
   }
 }
 
-export default connect(null, {setUser})(Landing)
+export default connect(null, { setUser })(Landing)
