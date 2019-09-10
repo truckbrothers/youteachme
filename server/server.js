@@ -21,7 +21,10 @@ app.use(session({
 }));
 
 // Endpoints
-
+app.post('/auth/register', authCtrl.register);
+app.post('/auth/login', authCtrl.login);
+app.get('/auth/me', authCtrl.authMe);
+app.post('/auth/logout', authCtrl.logout);
 
 //  Listener and DB hookup
 massive(CONNECTION_STRING)
