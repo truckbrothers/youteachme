@@ -1,7 +1,7 @@
 const initialState = {
-    user_id: null,
-    username: null,
-    user_image: null
+    user_id: '',
+    username: '',
+    user_image: ''
 }
 
 const SET_USER = 'SET_USER'
