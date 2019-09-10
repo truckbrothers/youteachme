@@ -1,12 +1,16 @@
 import React, { Component } from "react";
+import axios from 'axios';
+import {setUser} from '../../ducks/reducer'
+import {connect} from 'react-redux'
 
-export default class Login extends Component {
+class Landing extends Component {
   constructor() {
     super();
 
     this.state = {
       usernameInput: "",
-      passwordInput: ""
+      passwordInput: "",
+      register: false,
     };
   }
 
@@ -14,6 +18,25 @@ export default class Login extends Component {
     this.setState({
       [key]: e.target.value
     });
+  }
+
+  login = () => {
+    const {
+      usernameInput: username,
+      passwordInput: password
+    } = this.state
+    axios.post('/auth/login', {username, password})
+      .then(res => {
+        const {username, user_id, user_image} = res.data.user
+        this.props.setUser({ username, user_id, user_image})
+        if (res.data.user.mentor_status === true) {
+          this.props.history.push(`/mentor-check`)
+        }
+        else {
+          this.props.history.push(`/mentor-check`)
+        }
+      })
+      .catch(err => {alert('login failed')})
   }
 
   render() {
@@ -29,10 +52,17 @@ export default class Login extends Component {
               onChange={e => this.handleChange(e, "usernameInput")}
               type="text"
             />
-            <input />
+            <p>Password:</p>
+            <input
+              onChange={e => this.handleChange(e, "passwordInput")}
+              type="password"
+            />
+            <button onClick={this.login}>login</button>
           </div>
         </div>
       </div>
     );
   }
 }
+
+export default connect(null, {setUser})(Landing)
