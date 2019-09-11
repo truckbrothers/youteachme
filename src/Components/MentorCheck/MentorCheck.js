@@ -1,14 +1,31 @@
 import React, { Component } from 'react';
 import './mentorcheck.css';
 import { Button } from 'antd';
+import axios from 'axios'
+import { connect } from 'react-redux'
 
-export default class MentorCheck extends Component {
+class MentorCheck extends Component {
+  
     state = {
-
+        mentorStatus: ''
     }
+
+
     componentDidMount = () => {
-
+        axios.get(`/users/mentor-status/${this.props.user_id}`)
+        .then( res => {
+            console.log(res.data[0].mentor_status)
+            this.setState({
+                mentorStatus: res.data[0].mentor_status
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
+
+
+
     render() {
         return (
             <div className='wrapper'>
@@ -17,7 +34,9 @@ export default class MentorCheck extends Component {
                     <Button
                         // onCLick={}
                         type="primary"
-                        className='mentor-check-btn grow'>
+                        className='mentor-check-btn grow'
+                        // onClick={}
+                        >
                         Mentor
                     </Button>
                     <Button
@@ -31,3 +50,9 @@ export default class MentorCheck extends Component {
 
     }
 };
+function mapStateToProps(reduxState) {
+    const { user_id, toggleStatus } = reduxState
+    return { user_id, toggleStatus }
+}
+
+export default connect(mapStateToProps)(MentorCheck)
