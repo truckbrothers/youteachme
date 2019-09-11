@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import Nav from "../Nav/Nav";
 import "./feed.css";
+import { connect } from 'react-redux'
+import { mentorToggle } from '../../ducks/reducer'
 
-export default class Feed extends Component {
+class Feed extends Component {
   constructor() {
     super();
 
     this.state = {
-      toggleMentor: false
+
     };
   }
 
   toggleMentor = () => {
-    this.setState({
-      toggleMentor: !this.state.toggleMentor
-    });
+    this.props.mentorToggle()
   };
 
   render() {
@@ -22,7 +22,6 @@ export default class Feed extends Component {
       <div>
         <div className='toggle'>
           <span>Learner</span>
-
           <label className="switch">
             <input
               onClick={() => {
@@ -34,16 +33,23 @@ export default class Feed extends Component {
           </label>
           <span>Mentor</span>
         </div>
-        {this.state.toggleMentor ? 
-        <div className='mentor-section'>
+        {this.props.toggleStatus ?
+          <div className='mentor-section'>
             <h1>Mentor Mode</h1>
-        </div>
-        :
-        <div className="learner-section">
+          </div>
+          :
+          <div className="learner-section">
             <h1>Learner Mode</h1>
-        </div>
+          </div>
         }
       </div>
     );
   }
 }
+
+function mapStateToProps(reduxState) {
+  const { toggleStatus } = reduxState
+  return { toggleStatus }
+}
+
+export default connect(mapStateToProps, { mentorToggle })(Feed)
