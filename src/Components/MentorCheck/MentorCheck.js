@@ -6,12 +6,16 @@ export default class MentorCheck extends Component {
     state = {
 
     }
+    componentDidMount = () => {
+
+    }
     render() {
         return (
             <div className='wrapper'>
-                <div className='container'>Would You Like To:</div>
+                <div className='container'>Would you like to:</div>
                 <div className='button-wrapper'>
                     <Button
+                        // onCLick={}
                         type="primary"
                         className='mentor-check-btn grow'>
                         Mentor
