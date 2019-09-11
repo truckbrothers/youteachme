@@ -29,12 +29,7 @@ class Landing extends Component {
       .then(res => {
         const { username, user_id, user_image } = res.data.user
         this.props.setUser({ username, user_id, user_image })
-        if (res.data.user.mentor_status === false) {
           this.props.history.push(`/mentor-check`)
-        }
-        else {
-          this.props.history.push(`/feed`)
-        }
       })
       .catch(err => { alert('login failed') })
   }
