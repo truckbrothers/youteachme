@@ -8,11 +8,11 @@ import { HashRouter } from 'react-router-dom'
 import store from "../src/ducks/store";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <HashRouter>
+  <HashRouter>
+    <Provider store={store}>
       <App />
-    </HashRouter>
-  </Provider>,
+      </Provider>
+    </HashRouter>,
   document.getElementById("root")
 );
 
