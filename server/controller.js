@@ -21,5 +21,27 @@ module.exports = {
         catch(err) {
             res.status(500).send(`Error in retrieving mentor status: ${err}`)
         }
+    },
+    addMentor: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            const { user_id, language_id } = req.body
+            const mentor = await db.insert_mentor({user_id, language_id})
+            res.status(200).send(mentor)
+        }
+        catch(err) {
+            res.status(500).send(`Error in adding mentor: ${err}`)
+        }
+    },
+    updateMentorStatus: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            const { user_id } = req.params
+            const updatedMentorStatus = await db.update_mentor_status([user_id])
+            res.status(200).send(updatedMentorStatus)
+        }
+        catch(err) {
+            res.status(500).send(`Error in updating mentor status: ${err}`)
+        }
     }
 }
