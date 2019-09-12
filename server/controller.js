@@ -1,14 +1,14 @@
 module.exports = {
     setMentorToggle: (req, res) => {
-        console.log(req.session)
+        // console.log(req.session)
         req.session.mentorToggle = false
-        console.log(req.session)
+        // console.log(req.session)
         res.status(200).send(req.session.mentorToggle)
     },
     changeMentorToggle: (req, res) => {
-        console.log(req.session)
+        // console.log(req.session)
         req.session.mentorToggle = !req.session.mentorToggle
-        console.log(req.session)
+        // console.log(req.session)
         res.status(200).send(req.session.mentorToggle)
     },
     getMentorStatus: async (req, res) => {

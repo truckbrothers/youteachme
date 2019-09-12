@@ -29,6 +29,8 @@ app.get('/users/mentor-status/:user_id', ctrl.getMentorStatus)
 app.get('/mentor-toggle', ctrl.setMentorToggle)
 app.post('/mentors', ctrl.addMentor)
 app.put('/users/updated-mentor-status/:user_id', ctrl.updateMentorStatus)
+app.put('/set-session', ctrl.changeMentorToggle)
+
 
 //  Listener and DB hookup
 massive(CONNECTION_STRING)

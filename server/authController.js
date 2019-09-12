@@ -12,6 +12,7 @@ module.exports = {
         const hash = bcrypt.hashSync(password, salt)
         const newUser = await db.insert_user({ username, hash, user_image, mentor_status })
         req.session.user = newUser[0]
+        req.session.mentorToggle = false
         return res.status(200).send({ message: 'Logged in', user: req.session.user, loggedIn: true })
     },
     login: async (req, res) => {
@@ -24,13 +25,15 @@ module.exports = {
         const result = bcrypt.compareSync(password, user[0].hash)
         if (result) {
             req.session.user = user[0]
+            req.session.mentorToggle = false
             return res.status(200).send({ message: `Logged In`, user: req.session.user, loggedIn: true })
         } else {
             return res.status(400).send({ message: `Incorrect Password` })
         }
     },
     authMe: async (req, res) => {
-        return res.status(200).send({ user: req.session.user, loggedIn: true })
+        console.log(req.session)
+        return res.status(200).send({ user: req.session.user, mentorToggle: req.session.mentorToggle, loggedIn: true })
     },
     logout: (req, res) => {
         req.session.destroy()

@@ -1,0 +1,28 @@
+.l-learner {
+  border-bottom: 1px solid #725ac1;
+  font-size: 30px;
+  margin-right: 25px;
+}
+.l-mentor {
+  opacity: .5;
+  cursor: pointer;
+}
+.l-mentor:hover {
+  color: green;
+  font-size: 25px;
+  transition: all 0.2s ease-in-out;
+}
+.m-learner {
+  opacity: .5;
+  cursor: pointer;
+}
+.m-learner:hover {
+  color: green;
+  font-size: 25px;
+  transition: all 0.2s ease-in-out;
+}
+.m-mentor {
+  border-bottom: 1px solid #725ac1;
+  font-size: 30px;
+  margin-left: 25px;
+}
