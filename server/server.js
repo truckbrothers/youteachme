@@ -2,9 +2,15 @@ require('dotenv').config();
 const express = require('express');
 const massive = require('massive');
 const session = require('express-session');
-const { PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
+const { PORT, CONNECTION_STRING, SESSION_SECRET } = process.env || 4200
 const ctrl = require('./controller');
 const authCtrl = require('./authController');
+
+// Sockets stuff
+const socket = require('socket.io')
+const ssl = require('./socketsController')
+
+
 
 const app = express();
 
@@ -37,5 +43,13 @@ app.delete('/mentors/languages/:language_id', ctrl.deleteLanguage)
 massive(CONNECTION_STRING)
     .then(db => {
         app.set('db', db)
-        app.listen(PORT, () => console.log(`Motha truckin' on port ${PORT}`))
+
+        const io = socket(app.listen(PORT, () => console.log(`Motha truckin' on port ${PORT}`)))
+
+        //SOCKETS STUFF
+        io.on('connection', socket => {
+            console.log('A new user just connected');
+
+            ssl.setSocketListeners(socket, db, io)
+        })
     });
