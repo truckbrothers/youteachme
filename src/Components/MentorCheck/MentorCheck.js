@@ -34,7 +34,7 @@ class MentorCheck extends Component {
                 <div className='container'>Would you like to:</div>
                 <div className='button-wrapper'>
                     <Button
-                        onClick={this.state.mentorStatus ? () => this.props.history.push('/feed') :
+                        onClick={this.state.mentorStatus ? () => this.props.history.push('/mentor') :
                             () => Swal.fire({
                                 title: 'Are you sure?',
                                 text: "Mentoring is for experts only!",
@@ -60,7 +60,7 @@ class MentorCheck extends Component {
                         Mentor
                     </Button>
                     <Button
-                        onClick={() => this.props.history.push('/feed')}
+                        onClick={() => this.props.history.push('/learner')}
                         type="primary"
                         className='mentor-check-btn grow'>
                         Learn
