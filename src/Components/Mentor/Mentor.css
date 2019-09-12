@@ -1,0 +1,27 @@
+.l-learner {
+    border-bottom: 1px solid #725ac1;
+    font-size: 30px;
+  }
+  .l-mentor {
+    opacity: .5;
+    cursor: pointer;
+  }
+  .l-mentor:hover {
+    color: #725ac1;;
+    font-size: 25px;
+    transition: all 0.2s ease-in-out;
+  }
+  .m-learner {
+    opacity: .5;
+    cursor: pointer;
+  }
+  .m-learner:hover {
+    color: #725ac1;;
+    font-size: 25px;
+    transition: all 0.2s ease-in-out;
+  }
+  .m-mentor {
+    border-bottom: 1px solid #725ac1;
+    font-size: 30px;
+  }
+  

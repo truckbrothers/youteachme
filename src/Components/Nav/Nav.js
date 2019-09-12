@@ -19,11 +19,12 @@ class Nav extends Component {
         })
     }
     componentDidMount() {
-        console.log(this.props)
+        // console.log(this.props)
         axios.get('/auth/me').then(res => {
             if (res.data.user) {
+                const {mentorToggle} = res.data
                 const { username, user_image, user_id } = res.data.user
-                this.props.setUser({ username, user_image, user_id })
+                this.props.setUser({ username, user_image, user_id, mentorToggle })
             }
         })
             .catch(err => { alert(`couldn't find user info`, err) })
@@ -32,7 +33,7 @@ class Nav extends Component {
         const { pathname } = this.props.location
         return (
             <div className="Nav">
-                {pathname === "/feed" || pathname === "/profile" || pathname === "/chat" ?
+                {pathname === "/learner" || pathname === "/mentor" || pathname === "/profile" || pathname === "/chat" ?
                     (<><div className="nav-content" >
                         <img
                         className="user-image nav-link"
