@@ -43,3 +43,15 @@ CREATE TABLE chat_messages(
     message_text TEXT,
     message_id SERIAL PRIMARY KEY
 );
+
+INSERT INTO languages (language_name)
+VALUES ('JavaScript'), 
+       ('HTML'),
+       ('CSS'),
+       ('React'),
+       ('SQL'),
+       ('Redux'),
+       ('Python'),
+       ('Angular'),
+       ('NodeJS'),
+       ('TypeScript');
