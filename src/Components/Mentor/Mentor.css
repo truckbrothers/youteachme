@@ -1,5 +1,5 @@
 .l-learner {
-    text-decoration: underline;
+    border-bottom: 1px solid #725ac1;
     font-size: 30px;
   }
   .l-mentor {
@@ -7,7 +7,7 @@
     cursor: pointer;
   }
   .l-mentor:hover {
-    color: rgb(31, 165, 26);
+    color: green;
     font-size: 25px;
     transition: all 0.2s ease-in-out;
   }
@@ -16,12 +16,12 @@
     cursor: pointer;
   }
   .m-learner:hover {
-    color: rgb(31, 165, 26);
+    color: green;
     font-size: 25px;
     transition: all 0.2s ease-in-out;
   }
   .m-mentor {
-    text-decoration: underline;
+    border-bottom: 1px solid #725ac1;
     font-size: 30px;
   }
   

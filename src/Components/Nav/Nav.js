@@ -19,7 +19,7 @@ class Nav extends Component {
         })
     }
     componentDidMount() {
-        console.log(this.props)
+        // console.log(this.props)
         axios.get('/auth/me').then(res => {
             if (res.data.user) {
                 const {mentorToggle} = res.data
