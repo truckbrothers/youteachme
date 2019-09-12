@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
 
 export default class Request extends Component {
-    constructor() {
-        super()
+    state = {
 
-        this.state = {
-
-        }
     }
-
     render() {
         return (
-            <div>
+            <div className='request'>
+                
             </div>
         )
     }
