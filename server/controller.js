@@ -43,5 +43,18 @@ module.exports = {
         catch(err) {
             res.status(500).send(`Error in updating mentor status: ${err}`)
         }
+    },
+    deleteLanguage: async (req, res) => {
+        try {
+            const { user_id } = req.session
+            const { language_id } = req.params
+            const db = req.app.get('db')
+            await db.delete_language({user_id, language_id})
+            res.status(200).send({message: 'language deleted'})
+
+        }
+        catch(err) {
+            res.status(500).send(`Error in deleting language: ${err}`)
+        }
     }
 }

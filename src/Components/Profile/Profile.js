@@ -5,13 +5,13 @@ import { connect } from "react-redux";
 import { setUser } from "../../ducks/reducer";
 import { withRouter } from "react-router-dom";
 import "./Profile.css";
-import { Spin } from 'antd'
 
 class Profile extends Component {
   constructor() {
     super();
     this.state = {
-        mentorStatus: ''
+      mentorStatus: "",
+      loading: false
     };
   }
   componentDidMount() {
@@ -38,14 +38,19 @@ class Profile extends Component {
       });
   }
 
-  updateMentorStatus = (user_id) => {
-    axios
-      .put(`/users/updated-mentor-status/${user_id}`)
-      .then(res => {
-          console.log(res.data)
-          
-      })
+  updateMentorStatus = user_id => {
+    axios.put(`/users/updated-mentor-status/${user_id}`).then(res => {
+      console.log(res.data);
+    });
+  };
 
+  addSkill = e => {
+    const { user_id } = this.props
+    const language_id = e.target.value
+    axios.post('/mentors', {
+        user_id,
+        language_id
+    })
   }
 
   render() {
@@ -60,42 +65,63 @@ class Profile extends Component {
           />
           {this.props.username}
         </div>
-        {/* Render the following component conditionally based on the mentorStatus from the database */}
-        {/* The thinking of mentoring section will render if mentorStatus is false */}
-        {this.state.mentorStatus === false ? 
-         <div className="mentor-section">
-         <span>Thinking of Mentoring?</span>
-         <button
-           onClick={() =>
-             Swal.fire({
-               title: "Are you sure?",
-               text: "Mentoring is for experts only!",
-               type: "warning",
-               showCancelButton: true,
-               confirmButtonColor: "#3085d6",
-               cancelButtonColor: "#d33",
-               confirmButtonText: "Yes, I wanna mentor!"
-             }).then(result => {
-               if (result.value) {
-                 Swal.fire(
-                   "You're a mentor!",
-                   "Be sure to select some skills.",
-                   "success"
-                   //toggle the mentorStatus for true at this point
-                 );
-                 this.updateMentorStatus(this.props.user_id)
-                 setTimeout(() => window.location.reload(), 1500)
-               }
-             })
-           }
-         >
-           Mentor Today
-         </button>
-       </div>
-       :
-       <div>Mentor Skills</div>
-    }
-       
+        {this.state.loading ? (
+          <div className="loading-spinner">
+            <img
+              src="https://icon-library.net//images/spinner-icon-gif/spinner-icon-gif-1.jpg"
+              width="150"
+            />
+          </div>
+        ) : null}
+        {this.state.mentorStatus === false ? (
+          <div className="mentor-section">
+            <span>Thinking of Mentoring?</span>
+            <button
+              onClick={() =>
+                Swal.fire({
+                  title: "Are you sure?",
+                  text: "Mentoring is for experts only!",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, I wanna mentor!"
+                }).then(result => {
+                  if (result.value) {
+                    this.setState({
+                      loading: true
+                    });
+                    Swal.fire(
+                      "You're a mentor!",
+                      "Be sure to select some skills.",
+                      "success"
+                    );
+                    this.updateMentorStatus(this.props.user_id);
+                    setTimeout(() => window.location.reload(), 10000);
+                  }
+                })
+              }
+            >
+              Mentor Today
+            </button>
+          </div>
+        ) : (
+          <div className='mentor-view'>
+            <h1>Select Your Skills</h1>
+            <div className='skills-buttons'>
+              <button onClick={e => this.addSkill(e)} value='1'>JavaScript</button>
+              <button onClick={e => this.addSkill(e)} value='2'>HTML</button>
+              <button onClick={e => this.addSkill(e)} value='3'>CSS</button>
+              <button onClick={e => this.addSkill(e)} value='4'>React</button>
+              <button onClick={e => this.addSkill(e)} value='5'>SQL</button>
+              <button onClick={e => this.addSkill(e)} value='6'>Redux</button>
+              <button onClick={e => this.addSkill(e)} value='7'>Python</button>
+              <button onClick={e => this.addSkill(e)} value='8'>Angular</button>
+              <button onClick={e => this.addSkill(e)} value='9'>NodeJS</button>
+              <button onClick={e => this.addSkill(e)} value='10'>TypeScript</button>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
