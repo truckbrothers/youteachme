@@ -27,6 +27,8 @@ app.get('/auth/me', authCtrl.authMe);
 app.post('/auth/logout', authCtrl.logout);
 app.get('/users/mentor-status/:user_id', ctrl.getMentorStatus)
 app.get('/mentor-toggle', ctrl.setMentorToggle)
+app.put('/set-session', ctrl.changeMentorToggle)
+
 
 //  Listener and DB hookup
 massive(CONNECTION_STRING)
