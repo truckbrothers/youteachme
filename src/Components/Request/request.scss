@@ -1,0 +1,49 @@
+.request-container {
+  padding: 5px 20px 5px 20px;
+	width: 50vw;
+	border: 1px solid black;
+	min-height: 50px;
+	box-shadow: 5px 5px 5px darkgray;
+	background: rgb(255, 254, 254);
+	border-radius: 5px;
+}
+.request-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.request-text {
+	text-overflow: ellipsis;
+	display: block;
+	width: 50vw;
+	min-height: 50px;
+	cursor: pointer;
+}
+
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
+  overflow: hidden;
+  position: relative;
+  line-height: $lineHeight;
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+  &:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  &:after {
+    content: '';
+    // position: absolute;
+    right: 0;
+    width: 1em;
+    // height: 1em;
+    margin-top: 0.2em;
+    background: $bgColor;
+  }
+}
+
+.block-with-text {
+  @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3, $bgColor: white);  
+}

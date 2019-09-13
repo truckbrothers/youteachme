@@ -14,7 +14,7 @@ class Profile extends Component {
         }
     }
     componentDidMount() {
-        console.log(this.props)
+        // console.log(this.props)
         axios.get('/auth/me').then(res => {
             if (res.data.user) {
                 const { username, user_image, user_id } = res.data.user
