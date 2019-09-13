@@ -46,15 +46,27 @@ module.exports = {
     },
     deleteLanguage: async (req, res) => {
         try {
-            const { user_id } = req.session
+            const { user_id } = req.session.user
             const { language_id } = req.params
             const db = req.app.get('db')
+            console.log(`user_id: ${user_id}, language_id: ${language_id}`)
             await db.delete_language({user_id, language_id})
             res.status(200).send({message: 'language deleted'})
 
         }
         catch(err) {
             res.status(500).send(`Error in deleting language: ${err}`)
+        }
+    },
+    getUserLanguages: async (req, res) => {
+        try {
+            const { user_id } = req.session.user
+            const db = req.app.get('db')
+            const user_languages = await db.get_user_languages([user_id])
+            res.status(200).send(user_languages)
+        }
+        catch(err) {
+            res.status(500).send(`Error in retrieving user languages: ${err}`)
         }
     }
 }
