@@ -11,7 +11,8 @@ class Profile extends Component {
     super();
     this.state = {
       mentorStatus: "",
-      loading: false
+      loading: false,
+      skills: []
     };
   }
   componentDidMount() {
@@ -36,6 +37,19 @@ class Profile extends Component {
       .catch(err => {
         console.log(err);
       });
+      const skillsArr = []
+    axios
+        .get('/mentors/languages')
+        .then(res => {
+            res.data.map(el => {
+                skillsArr.push(el.language_id)
+                console.log(skillsArr)
+                this.setState({
+                    skills: skillsArr
+                })
+            })
+            console.log(this.state.skills)
+        })  
   }
 
   updateMentorStatus = user_id => {
