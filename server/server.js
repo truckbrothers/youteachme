@@ -34,8 +34,8 @@ app.post('/auth/logout', authCtrl.logout);
 app.get('/users/mentor-status/:user_id', ctrl.getMentorStatus)
 app.get('/mentor-toggle', ctrl.setMentorToggle)
 app.put('/set-session', ctrl.changeMentorToggle)
-
-
+app.post('/request', ctrl.makeRequest)
+app.get('/request/:user_id', ctrl.getRequests)
 //  Listener and DB hookup
 massive(CONNECTION_STRING)
     .then(db => {

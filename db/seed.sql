@@ -29,6 +29,7 @@ CREATE TABLE request_tags(
 
 CREATE TABLE chat(
     chat_id SERIAL PRIMARY KEY,
+    request_id INT REFERENCES request(request_id),
     title VARCHAR(250)
 );
 
