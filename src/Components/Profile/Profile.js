@@ -44,14 +44,34 @@ class Profile extends Component {
     });
   };
 
-  addSkill = e => {
-    const { user_id } = this.props
-    const language_id = e.target.value
-    axios.post('/mentors', {
-        user_id,
-        language_id
-    })
-  }
+  addOrDeleteUserSkill = e => {
+    const { user_id } = this.props;
+    const language_id = e.target.value;
+    axios.get("/mentors/languages").then(res => {
+      //   if user has no saved skills, add selected skill
+      if (res.data.length === 0) {
+        axios.post("/mentors", {
+          user_id,
+          language_id
+        });
+        // if user has 1+ skills, check if user already has selected skill
+      } else {
+        const foundLanguage = res.data.find(el => {
+          // if user has selected skill, delete that skill from db
+          return el.language_id == language_id;
+        });
+        if (foundLanguage) {
+          axios.delete(`/mentors/languages/${foundLanguage.language_id}`);
+        }
+        else {
+            axios.post('/mentors', {
+                user_id,
+                language_id
+            })
+        }
+      }
+    });
+  };
 
   render() {
     return (
@@ -106,19 +126,39 @@ class Profile extends Component {
             </button>
           </div>
         ) : (
-          <div className='mentor-view'>
+          <div className="mentor-view">
             <h1>Select Your Skills</h1>
-            <div className='skills-buttons'>
-              <button onClick={e => this.addSkill(e)} value='1'>JavaScript</button>
-              <button onClick={e => this.addSkill(e)} value='2'>HTML</button>
-              <button onClick={e => this.addSkill(e)} value='3'>CSS</button>
-              <button onClick={e => this.addSkill(e)} value='4'>React</button>
-              <button onClick={e => this.addSkill(e)} value='5'>SQL</button>
-              <button onClick={e => this.addSkill(e)} value='6'>Redux</button>
-              <button onClick={e => this.addSkill(e)} value='7'>Python</button>
-              <button onClick={e => this.addSkill(e)} value='8'>Angular</button>
-              <button onClick={e => this.addSkill(e)} value='9'>NodeJS</button>
-              <button onClick={e => this.addSkill(e)} value='10'>TypeScript</button>
+            <div className="skills-buttons">
+              <button onClick={e => this.addOrDeleteUserSkill(e)} value="1">
+                JavaScript
+              </button>
+              <button onClick={e => this.addOrDeleteUserSkill(e)} value="2">
+                HTML
+              </button>
+              <button onClick={e => this.addOrDeleteUserSkill(e)} value="3">
+                CSS
+              </button>
+              <button onClick={e => this.addOrDeleteUserSkill(e)} value="4">
+                React
+              </button>
+              <button onClick={e => this.addOrDeleteUserSkill(e)} value="5">
+                SQL
+              </button>
+              <button onClick={e => this.addOrDeleteUserSkill(e)} value="6">
+                Redux
+              </button>
+              <button onClick={e => this.addOrDeleteUserSkill(e)} value="7">
+                Python
+              </button>
+              <button onClick={e => this.addOrDeleteUserSkill(e)} value="8">
+                Angular
+              </button>
+              <button onClick={e => this.addOrDeleteUserSkill(e)} value="9">
+                NodeJS
+              </button>
+              <button onClick={e => this.addOrDeleteUserSkill(e)} value="10">
+                TypeScript
+              </button>
             </div>
           </div>
         )}

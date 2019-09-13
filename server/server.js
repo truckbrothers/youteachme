@@ -37,6 +37,7 @@ app.post('/mentors', ctrl.addMentor)
 app.put('/users/updated-mentor-status/:user_id', ctrl.updateMentorStatus)
 app.put('/set-session', ctrl.changeMentorToggle)
 app.delete('/mentors/languages/:language_id', ctrl.deleteLanguage)
+app.get('/mentors/languages', ctrl.getUserLanguages)
 
 
 //  Listener and DB hookup
