@@ -44,7 +44,6 @@ class Nav extends Component {
                     (<><div className="nav-content" >
                         <img
                         className="user-image nav-link"
-                        //onClick={() => this.setState({navHide: `nav-links`})}
                         onClick={this.state.navHide === 'nav-links-hidden' ? () => this.setState({navHide: `nav-links`}) : () => this.setState({navHide: `nav-links-hidden`})}
                         src={this.props.user_image}
                         alt='profile-pic'
