@@ -37,7 +37,7 @@ class Profile extends Component {
       .catch(err => {
         console.log(err);
       });
-      const skillsArr = []
+      const skillsArr = [}
     axios
         .get('/mentors/languages')
         .then(res => {
