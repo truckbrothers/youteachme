@@ -43,7 +43,7 @@ class Landing extends Component {
         console.log(res)
         const { username, user_id, user_image } = res.data.user
         this.props.setUser({ username, user_id, user_image })
-        this.props.history.push('/feed')
+        this.props.history.push('/mentor-check')
       }
       )
       .catch(err => { alert('register failed', err) })
