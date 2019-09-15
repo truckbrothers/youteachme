@@ -13,7 +13,8 @@ class Nav extends Component {
     constructor() {
         super()
         this.state = {
-            navHide: `nav-links-hidden`
+            navHide: `nav-links-hidden`,
+            mentorStatus: ''
         }
     }
     logout = () => {
@@ -21,7 +22,7 @@ class Nav extends Component {
             this.props.logoutUser()
             this.props.history.push('/')
             this.setState({
-                navHide:'nav-links-hidden'
+                navHide: 'nav-links-hidden'
             })
         })
     }
@@ -29,10 +30,21 @@ class Nav extends Component {
         // console.log(this.props)
         axios.get('/auth/me').then(res => {
             if (res.data.user) {
-                const {mentorToggle} = res.data
+                const { mentorToggle } = res.data
                 const { username, user_image, user_id } = res.data.user
                 this.props.setUser({ username, user_image, user_id, mentorToggle })
+                axios.get(`/users/mentor-status/${this.props.user_id}`)
+                .then(res => {
+                    console.log(res.data[0].mentor_status)
+                    this.setState({
+                        mentorStatus: res.data[0].mentor_status
+                    })
+                })
+                .catch(err => {
+                    console.log(err)
+                })
             }
+
         })
             .catch(err => { alert(`couldn't find user info`, err) })
     }
@@ -43,25 +55,26 @@ class Nav extends Component {
                 {pathname === "/learner" || pathname === "/mentor" || pathname === "/profile" || pathname === "/chat" ?
                     (<><div className="nav-content" >
                         <img
-                        className="user-image nav-link"
-                        onClick={this.state.navHide === 'nav-links-hidden' ? () => this.setState({navHide: `nav-links`}) : () => this.setState({navHide: `nav-links-hidden`})}
-                        src={this.props.user_image}
-                        alt='profile-pic'
+                            className="user-image nav-link"
+                            onClick={this.state.navHide === 'nav-links-hidden' ? () => this.setState({ navHide: `nav-links` }) : () => this.setState({ navHide: `nav-links-hidden` })}
+                            src={this.props.user_image}
+                            alt='profile-pic'
                         />
 
                         <div className={`nav ${this.state.navHide}`}>
                             <p>{this.props.username}</p>
-                            <Link className="profile-link nav-link" to='/profile'>Profile</Link>
+                            {this.state.mentorStatus ? <Link className="nav-link home-link" to='/mentor'>Home</Link> : <Link className="nav-link home-link" to='/learner'>Home</Link> }
+                            <p><Link className="profile-link nav-link" to='/profile'>Profile</Link></p>
                             <p className="logout nav-link" onClick={this.logout}>Logout</p>
-                            <p className="nav-link" onClick={() => this.setState({navHide: `nav-links-hidden`})}><FontAwesomeIcon icon={faCaretLeft} /> Hide</p>
+                            <p className="nav-link" onClick={() => this.setState({ navHide: `nav-links-hidden` })}><FontAwesomeIcon icon={faCaretLeft} /> Hide</p>
                         </div>
                     </div>
-                    <div 
-                    className={`dark ${this.state.navHide}`}
-                    onClick={() => this.setState({navHide: `nav-links-hidden`})}
-                    >
+                        <div
+                            className={`dark ${this.state.navHide}`}
+                            onClick={() => this.setState({ navHide: `nav-links-hidden` })}
+                        >
                         </div>
-                        </>
+                    </>
                     ) : null}
             </div>
         )
