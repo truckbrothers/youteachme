@@ -62,9 +62,8 @@ form > button:focus{
   outline:none;
 } */
 .submit {
-  z-index: 999;
   position: absolute;
-  right: 340px;
+  right: 27%;
   top: 375px;
   height: 30px;
   width: 60px;
