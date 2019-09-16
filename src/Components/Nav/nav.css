@@ -30,6 +30,10 @@
   transition: 500ms;
   transform: translate(100px);
 }
+.home-link{
+  color: inherit;
+  text-decoration: none;
+}
 .profile-link {
   color: inherit;
   text-decoration: none;
