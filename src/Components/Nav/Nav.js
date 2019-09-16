@@ -33,6 +33,16 @@ class Nav extends Component {
                 const { mentorToggle } = res.data
                 const { username, user_image, user_id } = res.data.user
                 this.props.setUser({ username, user_image, user_id, mentorToggle })
+                axios.get(`/users/mentor-status/${this.props.user_id}`)
+                .then(res => {
+                    console.log(res.data[0].mentor_status)
+                    this.setState({
+                        mentorStatus: res.data[0].mentor_status
+                    })
+                })
+                .catch(err => {
+                    console.log(err)
+                })
             }
             axios.get(`/users/mentor-status/${this.props.user_id}`)
                 .then(res => {
@@ -63,8 +73,8 @@ class Nav extends Component {
 
                         <div className={`nav ${this.state.navHide}`}>
                             <p>{this.props.username}</p>
-                            {this.state.mentorStatus === true ? <Link className="nav-link home-link" to='/mentor'>Home</Link> : <Link className="nav-link home-link" to='/learner'>Home</Link> }
-                            <p><Link className="profile-link nav-link" to='/profile'>Profile</Link></p>
+                            {this.state.mentorStatus === true ? <Link className="nav-link home-link" to='/mentor' onClick={() => this.setState({ navHide: `nav-links-hidden` })}>Home</Link> : <Link className="nav-link home-link" to='/learner' onClick={() => this.setState({ navHide: `nav-links-hidden` })}>Home</Link> }
+                            <p><Link className="profile-link nav-link" to='/profile' onClick={() => this.setState({ navHide: `nav-links-hidden` })}>Profile</Link></p>
                             <p className="logout nav-link" onClick={this.logout}>Logout</p>
                             <p className="nav-link" onClick={() => this.setState({ navHide: `nav-links-hidden` })}><FontAwesomeIcon icon={faCaretLeft} /> Hide</p>
                         </div>
