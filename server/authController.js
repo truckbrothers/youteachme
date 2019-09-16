@@ -32,7 +32,7 @@ module.exports = {
         }
     },
     authMe: async (req, res) => {
-        console.log(req.session)
+        // console.log(req.session)
         return res.status(200).send({ user: req.session.user, mentorToggle: req.session.mentorToggle, loggedIn: true })
     },
     logout: (req, res) => {
