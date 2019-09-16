@@ -1,11 +1,12 @@
 .request-container {
-  padding: 5px 20px 5px 20px;
+  padding: 10px 20px 25px 20px;
 	width: 50vw;
-	border: 1px solid black;
+	border: 1px solid rgb(94, 84, 84);
 	min-height: 50px;
 	box-shadow: 5px 5px 5px darkgray;
 	background: rgb(255, 254, 254);
-	border-radius: 5px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 .request-wrapper {
 	display: flex;
@@ -17,7 +18,17 @@
 	display: block;
 	width: 50vw;
 	min-height: 50px;
-	cursor: pointer;
+	// cursor: pointer;
+}
+.answer-btn {
+  position: absolute;
+  right: 25%;
+  cursor: pointer;
+}
+.answer-btn:hover {
+  background: #1890FF;
+  color: white;
+  border-radius: 3px;
 }
 
 @mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
