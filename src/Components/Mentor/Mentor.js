@@ -23,8 +23,12 @@ class Mentor extends Component {
         this.getRequests()
     }
     render() {
-        const requestsMap = this.state.requests.map((el => (
-            <Request/>
+        const requestsMap = this.state.requests.map(((el, i) => (
+            <Request
+            key={el.request_id}
+            request_info={el.request_info}
+            id={el.chat_id}
+            />
         )))
         return (
             <div className='mentor-section'>
