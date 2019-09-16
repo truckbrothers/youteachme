@@ -4,16 +4,52 @@ import "./Learner.css";
 import { connect } from 'react-redux'
 import { mentorToggle } from '../../ducks/reducer'
 import { Button } from 'antd';
+import axios from 'axios'
+import {withRouter} from 'react-router-dom'
 
 class Learner extends Component {
   constructor() {
     super();
 
     this.state = {
+      request: '',
+      tags: [],
+      languages: []
 
     };
   }
+  componentDidMount() {
+    axios.get('/languages')
+    .then(languages => this.setState({
+      languages: languages.data
+    }))
+    .catch(err=> console.log("couldn't get languages"))
+  }
+  submitRequest = () => {
+    axios.post('/request', {user_id:this.props.user_id, request_info: this.state.request, language_id: this.state.tags})
+      .then( () => {
+        this.props.history.push('/chat')
+      })
+  }
+  handleChange = e => {
+    this.setState({
+      request: e.target.value
+    })
+  }
+  handleLanguage = id => {
+    if(this.state.tags.includes(id)){
+      console.log('already selected')
+    }
+    else{
+      this.setState({
+        tags: [...this.state.tags, id]
+      })
+    }
+  }
   render() {
+    const languageMap = this.state.languages.map(el => 
+      <option onClick={() => this.handleLanguage(el.language_id)} key={el.language_id}>{el.language_name}</option>
+    )
     return (
       <div className="learner-section">
         <div className='header'>
@@ -26,8 +62,9 @@ class Learner extends Component {
         <div className='message-container'>
           <h1>Ask a Mentor</h1>
           <form>
-            <textarea placeholder='Some text...'></textarea>
-            <Button className='submit' type="primary">Submit</Button>
+            <textarea onChange={e => this.handleChange(e)} placeholder='Some text...'></textarea>
+            <select>{languageMap}</select>
+            <Button onClick={this.submitRequest} className='submit' type="primary">Submit</Button>
           </form>
         </div>
 
@@ -37,8 +74,8 @@ class Learner extends Component {
 }
 
 function mapStateToProps(reduxState) {
-  const { toggleStatus } = reduxState
-  return { toggleStatus }
+  const { toggleStatus, user_id } = reduxState
+  return { toggleStatus, user_id }
 }
 
-export default connect(mapStateToProps, { mentorToggle })(Learner)
+export default connect(mapStateToProps, { mentorToggle })(withRouter(Learner))

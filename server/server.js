@@ -40,6 +40,7 @@ app.post('/request', ctrl.makeRequest)
 app.get('/request/:user_id', ctrl.getRequests)
 app.delete('/mentors/languages/:language_id', ctrl.deleteLanguage)
 app.get('/mentors/languages', ctrl.getUserLanguages)
+app.get('/languages', ctrl.getLanguages)
 
 
 //  Listener and DB hookup

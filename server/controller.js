@@ -28,9 +28,9 @@ module.exports = {
             const { user_id, request_info, language_id } = req.body
             const request = await db.insert_request({user_id, request_info})
             const { request_id } = request[0]
-            await language_id.map((el => db.insert_request_tags({request_id: request_id, language_id: el})))
-            await db.insert_chat({request_id: request_id, title: request_info })
-            res.status(200).send(request)
+            await language_id.map((el => db.insert_request_tags({request_id: request_id, language_id: el.language_id})))
+            const chat = await db.insert_chat({request_id: request_id, title: request_info })
+            res.status(200).send(chat)
         }
         catch(err) {
             res.status(500).send(`error in making a new request: ${err}`)
@@ -93,6 +93,16 @@ module.exports = {
         }
         catch(err) {
             res.status(500).send(`Error in retrieving user languages: ${err}`)
+        }
+    },
+    getLanguages: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            const languages = await db.find_languages()
+            res.status(200).send(languages)
+        }
+        catch(err) {
+            res.status(500).send(`Couldn't get languages: ${err}`)
         }
     }
 }
