@@ -17,6 +17,6 @@ export default (
         <Route path = '/mentor' component = { Mentor } />
         <Route path = '/profile' component = { Profile } />
         <Route path = '/request' component = { Request } />
-        <Route path = '/chat' component = { Chat } />
+        <Route path = '/chat/:chat_id' component = { Chat } />
     </Switch>
 )
