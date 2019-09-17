@@ -117,5 +117,16 @@ module.exports = {
         catch(err) {
             res.status(500).send(`Couldn't get languages: ${err}`)
         }
+    },
+    deleteRequest: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            const {request_id} = req.params
+            const deleteTags = await db.delete_tags([request_id])
+            res.status(200).send(deleteTags)
+        }
+        catch(err) {
+            res.status(500).send(`Failed to delete`)
+        }
     }
 }
