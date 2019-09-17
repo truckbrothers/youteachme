@@ -9,7 +9,7 @@ import { faCaretLeft } from '@fortawesome/free-solid-svg-icons';
 
 import './nav.css'
 
-class Nav extends Component {
+export class Nav extends Component {
     constructor() {
         super()
         this.state = {

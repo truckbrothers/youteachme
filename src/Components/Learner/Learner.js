@@ -7,7 +7,7 @@ import { Button } from 'antd';
 import axios from 'axios'
 import {withRouter} from 'react-router-dom'
 
-class Learner extends Component {
+export class Learner extends Component {
   constructor() {
     super();
 
