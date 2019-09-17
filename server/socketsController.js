@@ -36,12 +36,12 @@ module.exports = {
         })
         // NEW MESSAGE
         socket.on('send message', async data => {
-            console.log('console-message is: ', data);
+            // console.log('console-message is: ', data);
             const { from, message_text,  createdAt, user_id, chat_id } = data
-            console.log('data room:', chat_id);
+            // console.log('data room:', chat_id);
             await db.insert_message({chat_id, user_id, message_text})
             let messages = await db.find_messages(chat_id)
-            console.log('coming from db:', messages, from);
+            // console.log('coming from db:', messages, from);
             io.to(chat_id).emit('message sent', {messages})
             // io.to(roomId).emit('message sent', generateMessage(from, text, roomId, createdAt, userId))
         });

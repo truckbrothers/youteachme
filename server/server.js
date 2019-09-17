@@ -35,11 +35,13 @@ app.get('/users/mentor-status/:user_id', ctrl.getMentorStatus)
 app.get('/mentor-toggle', ctrl.setMentorToggle)
 app.post('/mentors', ctrl.addMentor)
 app.put('/users/updated-mentor-status/:user_id', ctrl.updateMentorStatus)
+app.put('/users/update-user-image', ctrl.updateImage)
 app.put('/set-session', ctrl.changeMentorToggle)
 app.post('/request', ctrl.makeRequest)
 app.get('/request/:user_id', ctrl.getRequests)
 app.delete('/mentors/languages/:language_id', ctrl.deleteLanguage)
 app.get('/mentors/languages', ctrl.getUserLanguages)
+app.get('/languages', ctrl.getLanguages)
 
 
 //  Listener and DB hookup

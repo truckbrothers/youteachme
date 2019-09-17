@@ -3,7 +3,7 @@ import axios from 'axios';
 import { setUser } from '../../ducks/reducer'
 import { connect } from 'react-redux'
 
-class Landing extends Component {
+export class Landing extends Component {
   constructor() {
     super();
 
@@ -29,7 +29,7 @@ class Landing extends Component {
       .then(res => {
         const { username, user_id, user_image } = res.data.user
         this.props.setUser({ username, user_id, user_image })
-          this.props.history.push(`/mentor-check`)
+        this.props.history.push(`/mentor-check`)
       })
       .catch(err => { alert('login failed') })
   }
@@ -58,34 +58,34 @@ class Landing extends Component {
         <div className="login-input-container">
           {this.state.register === false ?
             (
-            <div>
-              <p>Username:</p>
-              <input
-                onChange={e => this.handleChange(e, "usernameInput")}
-                type="text"
-              />
-              <p>Password:</p>
-              <input
-                onChange={e => this.handleChange(e, "passwordInput")}
-                type="password"
-              />
-              <button onClick={this.login}>login</button>
-            </div>) : (
-              
               <div>
-              <p>Username:</p>
-              <input
-                onChange={e => this.handleChange(e, "usernameInput")}
-                type="text"
-              />
-              <p>Password:</p>
-              <input
-                onChange={e => this.handleChange(e, "passwordInput")}
-                type="password"
-              />
-              <button onClick={this.register}>register</button>
-            </div>
-            
+                <p>Username:</p>
+                <input
+                  onChange={e => this.handleChange(e, "usernameInput")}
+                  type="text"
+                />
+                <p>Password:</p>
+                <input
+                  onChange={e => this.handleChange(e, "passwordInput")}
+                  type="password"
+                />
+                <button onClick={this.login}>login</button>
+              </div>) : (
+
+              <div>
+                <p>Username:</p>
+                <input
+                  onChange={e => this.handleChange(e, "usernameInput")}
+                  type="text"
+                />
+                <p>Password:</p>
+                <input
+                  onChange={e => this.handleChange(e, "passwordInput")}
+                  type="password"
+                />
+                <button onClick={this.register}>register</button>
+              </div>
+
             )}
           <button onClick={() => { this.setState({ register: !this.state.register }) }}>{this.state.register === false ? 'register' : 'cancel'}</button>
         </div>
