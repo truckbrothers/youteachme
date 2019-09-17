@@ -41,6 +41,7 @@ app.get('/request/:user_id', ctrl.getRequests)
 app.delete('/mentors/languages/:language_id', ctrl.deleteLanguage)
 app.get('/mentors/languages', ctrl.getUserLanguages)
 app.get('/languages', ctrl.getLanguages)
+app.delete('/request/:request_id', ctrl.deleteRequest)
 
 
 //  Listener and DB hookup

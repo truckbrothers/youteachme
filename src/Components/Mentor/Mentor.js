@@ -19,6 +19,7 @@ class Mentor extends Component {
             .then(request => this.setState({requests: request.data}))
             .catch(err => console.log(`couldn't get requests`))
     }
+
     componentDidMount() {
         this.getRequests()
     }
@@ -28,6 +29,7 @@ class Mentor extends Component {
             key={el.request_id}
             request_info={el.request_info}
             id={el.chat_id}
+            request_id={el.request_id}
             />
         )))
         return (
