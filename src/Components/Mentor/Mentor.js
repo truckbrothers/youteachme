@@ -6,7 +6,7 @@ import { mentorToggle } from '../../ducks/reducer'
 import axios from 'axios'
 import Request from '../Request/Request'
 
-class Mentor extends Component {
+export class Mentor extends Component {
     constructor() {
         super();
 
@@ -16,7 +16,7 @@ class Mentor extends Component {
     }
     getRequests = () => {
         axios.get(`/request/${this.props.user_id}`)
-            .then(request => this.setState({requests: request.data}))
+            .then(request => this.setState({ requests: request.data }))
             .catch(err => console.log(`couldn't get requests`))
     }
     componentDidMount() {
@@ -25,9 +25,9 @@ class Mentor extends Component {
     render() {
         const requestsMap = this.state.requests.map(((el, i) => (
             <Request
-            key={el.request_id}
-            request_info={el.request_info}
-            id={el.chat_id}
+                key={el.request_id}
+                request_info={el.request_info}
+                id={el.chat_id}
             />
         )))
         return (
@@ -37,7 +37,7 @@ class Mentor extends Component {
                         className='m-learner'
                         onClick={() => this.props.history.push('/learner')}
                     >Learner
-            </span>
+                    </span>
                     <span className='m-mentor'>Mentor</span>
                 </div>
                 <h1>Mentor Mode</h1>

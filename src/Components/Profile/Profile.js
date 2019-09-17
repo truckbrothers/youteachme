@@ -6,7 +6,7 @@ import { setUser } from "../../ducks/reducer";
 import { withRouter } from "react-router-dom";
 import "./Profile.css";
 
-class Profile extends Component {
+export class Profile extends Component {
   constructor() {
     super();
     this.state = {

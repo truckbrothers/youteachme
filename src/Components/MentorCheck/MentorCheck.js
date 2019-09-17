@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import Swal from 'sweetalert2'
 import { mentorToggle } from '../../ducks/reducer'
 
-class MentorCheck extends Component {
+export class MentorCheck extends Component {
 
     state = {
         mentorStatus: ''

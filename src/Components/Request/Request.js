@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './request.scss'
 import { withRouter } from 'react-router-dom'
 
-class Request extends Component {
+export class Request extends Component {
     state = {
         toggleInfo: false
     }
