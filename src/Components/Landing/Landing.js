@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 import { setUser } from '../../ducks/reducer'
 import { connect } from 'react-redux'
+import './Landing.css'
 
 export class Landing extends Component {
   constructor() {
@@ -51,7 +52,7 @@ export class Landing extends Component {
 
   render() {
     return (
-      <div>
+      <div className="login-page">
         <header className="login-header">
           <h1>youTeachMe</h1>
         </header>
@@ -68,8 +69,8 @@ export class Landing extends Component {
                 <input
                   onChange={e => this.handleChange(e, "passwordInput")}
                   type="password"
-                />
-                <button onClick={this.login}>login</button>
+                /><br></br>
+                <button onClick={this.login}>Login</button>
               </div>) : (
 
               <div>
@@ -82,12 +83,12 @@ export class Landing extends Component {
                 <input
                   onChange={e => this.handleChange(e, "passwordInput")}
                   type="password"
-                />
-                <button onClick={this.register}>register</button>
+                /><br></br>
+                <button onClick={this.register}>Register</button>
               </div>
 
             )}
-          <button onClick={() => { this.setState({ register: !this.state.register }) }}>{this.state.register === false ? 'register' : 'cancel'}</button>
+          <button onClick={() => { this.setState({ register: !this.state.register }) }}>{this.state.register === false ? 'Register' : 'Cancel'}</button>
         </div>
       </div>
     );

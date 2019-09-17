@@ -5,11 +5,28 @@
     margin: 0 0 5% 0;
     border: 1px solid blue;
 }
-.general-section > img{
+.image-area > img{
     margin: 2% 0 2% 0;
     width:200px;
     height:200px;
     border-radius:50%;
+}
+.image-area:hover{
+    opacity: .7;
+    cursor: pointer;
+    color: black;
+}
+.image-area .text {
+    position:absolute;
+    top:7%;
+    left:47%;
+    visibility:hidden;
+    z-index:5;
+}
+    
+.image-area:hover .text {
+    visibility:visible;
+    cursor: pointer;
 }
 
 .mentor-section > button {
@@ -37,4 +54,12 @@
 .skills-buttons > button {
     width: 90px;
     height: 20px;
+}
+
+.selected {
+    background: green;
+}
+
+.unselected {
+    background: red;
 }

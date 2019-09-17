@@ -3,7 +3,7 @@ import './request.scss'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 
-class Request extends Component {
+export class Request extends Component {
     state = {
         toggleInfo: false
     }
