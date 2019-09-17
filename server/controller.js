@@ -89,7 +89,6 @@ module.exports = {
             const { language_id } = req.params
             const db = req.app.get('db')
             const updatedLanguages = await db.delete_language({user_id, language_id})
-            console.log(updatedLanguages)
             res.status(200).send(updatedLanguages)
 
         }

@@ -89,22 +89,47 @@ export class Profile extends Component {
           language_id
         }).then(res => {
           res.data.map(el => {
-            console.log(el.language_id)
             skillsArr.push(el.language_id)
             this.setState({
               skills: skillsArr
             })
           })
         })
-        // if user has 1+ skills, check if user already has selected skill
-      } else {
+      } 
+      // if user has 1 skill, check if that skill matches selected skill
+      else if (res.data.length === 1) {
+        const foundLanguage = res.data.find(el => {
+          return el.language_id === +language_id
+        })
+        if (foundLanguage) {
+          axios.delete(`/mentors/languages/${foundLanguage.language_id}`).then(res => {
+            this.setState({
+              skills: []
+            })
+          })
+        }
+        else {
+          axios.post("/mentors", {
+            user_id,
+            language_id
+          }).then(res => {
+            res.data.map(el => {
+              skillsArr.push(el.language_id)
+              this.setState({
+                skills: skillsArr
+              })
+            })
+          })
+        }
+      }
+      // if user has 2+ skills, check if user already has selected skill
+      else {
         const foundLanguage = res.data.find(el => {
           // if user has selected skill, delete that skill from db
           return el.language_id === +language_id;
         });
         if (foundLanguage) {
           axios.delete(`/mentors/languages/${foundLanguage.language_id}`).then(res => {
-            console.log(res.data)
             res.data.map(el => {
               skillsArr.push(el.language_id)
               this.setState({
