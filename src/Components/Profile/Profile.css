@@ -38,3 +38,11 @@
     width: 90px;
     height: 20px;
 }
+
+.selected {
+    background: green;
+}
+
+.unselected {
+    background: red;
+}

@@ -1,2 +1,3 @@
 DELETE FROM mentors
-WHERE user_id = ${user_id} AND language_id = ${language_id};
+WHERE user_id = ${user_id} AND language_id = ${language_id}
+RETURNING * language_id;
