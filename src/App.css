@@ -1,6 +1,12 @@
 .App {
   text-align: center;
 }
+input{
+  outline:none;
+}
+button{
+  outline:none;
+}
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
