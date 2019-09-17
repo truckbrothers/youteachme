@@ -88,9 +88,9 @@ module.exports = {
             const { user_id } = req.session.user
             const { language_id } = req.params
             const db = req.app.get('db')
-            console.log(`user_id: ${user_id}, language_id: ${language_id}`)
-            await db.delete_language({user_id, language_id})
-            res.status(200).send({message: 'language deleted'})
+            const updatedLanguages = await db.delete_language({user_id, language_id})
+            console.log(updatedLanguages)
+            res.status(200).send(updatedLanguages)
 
         }
         catch(err) {
