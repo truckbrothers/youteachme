@@ -32,7 +32,7 @@ export class Mentor extends Component {
         )))
         return (
             <div className='mentor-section'>
-                <div>
+                <div className='header'>
                     <span
                         className='m-learner'
                         onClick={() => this.props.history.push('/learner')}

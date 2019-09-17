@@ -73,7 +73,6 @@ export class Learner extends Component {
             <Button onClick={this.submitRequest} className='submit' type="primary">Submit</Button>
           </form>
         </div>
-
       </div>
     );
   }
