@@ -70,6 +70,19 @@ module.exports = {
             res.status(500).send(`Error in updating mentor status: ${err}`)
         }
     },
+    updateImage: async (req,res) => {
+        try{const { user_image, user_id } = req.body
+        const db = req.app.get('db')
+        const imageToUpdate = await db.update_image([user_image, user_id])
+        req.session.user.user_image = user_image
+        console.log('mtest:',req.session.user)
+        res.status(200).send(imageToUpdate)
+    }
+    catch
+            {
+                res.status(400).send('messed up while attempting to edit image')
+            }
+    },
     deleteLanguage: async (req, res) => {
         try {
             const { user_id } = req.session.user

@@ -12,7 +12,9 @@ class Profile extends Component {
     this.state = {
       mentorStatus: "",
       loading: false,
-      skills: []
+      skills: [],
+      editImage: false,
+      image: ''
     };
   }
   componentDidMount() {
@@ -51,6 +53,27 @@ class Profile extends Component {
             console.log(this.state.skills)
         })  
   }
+  toggleEdit() {
+    this.setState({ editImage: !this.state.editImage })
+  }
+  handleChange(e, key) {
+    this.setState({
+      [key]: e.target.value
+    })
+  }
+  updateImage() {
+    const {image: user_image} = this.state
+    axios.put(`/users/update-user-image`, { user_image, user_id: this.props.user_id }).then(res => {
+      this.toggleEdit()
+      this.props.setUser({username: this.props.username, user_id: this.props.user_id, user_image})
+    })
+      .catch(err => {
+        alert('Sorry! Try Updating again.')
+      })
+    this.setState({
+      image: ''
+    })
+  }
 
   updateMentorStatus = user_id => {
     axios.put(`/users/updated-mentor-status/${user_id}`).then(res => {
@@ -88,6 +111,8 @@ class Profile extends Component {
   };
 
   render() {
+    let { editImage } = this.state
+    const editStyle = this.state.editImage ? {} : { display: 'none' }
     return (
       <div className="profile-page">
         <div className="general-section">
@@ -97,6 +122,19 @@ class Profile extends Component {
             src={this.props.user_image}
             alt="profile-pic"
           />
+          <button onClick={() => this.toggleEdit()}>Update Image</button>
+          <div className="edit-image-section" style={editStyle}>
+          <input
+              type="text"
+              onChange={e => this.handleChange(e, 'image')}
+              placeholder="New Img Url"
+              value={this.state.image}
+            /> 
+            <div className="hidden-buttons">
+              <button id="save-button" onClick={() => this.updateImage()}>Save</button>
+              <button id="cancel-button" onClick={() => this.toggleEdit()}>Cancel</button>
+            </div>
+          </div>
           {this.props.username}
         </div>
         {this.state.loading ? (
