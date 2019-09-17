@@ -28,7 +28,7 @@ module.exports = {
             const { user_id, request_info, language_id } = req.body
             const request = await db.insert_request({user_id, request_info})
             const { request_id } = request[0]
-            await language_id.map((el => db.insert_request_tags({request_id: request_id, language_id: el.language_id})))
+            await language_id.map((el => db.insert_request_tags({request_id: request_id, language_id: el})))
             const chat = await db.insert_chat({request_id: request_id, title: request_info })
             res.status(200).send(chat)
         }
