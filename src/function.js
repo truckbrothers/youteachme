@@ -1,7 +1,11 @@
 let state = {
     name: 'wyatt',
     navHide: 'nav-links-hidden',
-    mentorStatus: ''
+    mentorStatus: '',
+    languages: [],
+    tags: [],
+    requests: [],
+    usernameInput: "TruckBrothers"
 }
 
 module.exports = {
@@ -20,5 +24,17 @@ module.exports = {
     },
     mentorStatusValue() {
         return state.mentorStatus
+    },
+    handleLanguage() {
+        return state.languages
+    },
+    handleTags() {
+        return state.tags
+    },
+    getRequests() {
+        return state.requests
+    },
+    login() {
+        return state.usernameInput
     }
 }

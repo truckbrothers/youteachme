@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: rgb(68, 60, 60);
+    color: #9C9C9C;
     align-items: center;
     /* height: 11vh; */
     width: 47vw;
@@ -17,7 +17,8 @@
 	flex-direction: column;
 	justify-content: space-evenly;
     align-items: center;
-    background: #eff5f0ce;
+    /* background: #494949; */
+    background-image: linear-gradient(#494949, #494949, #494949,#252525);
 }
 .mentor-check-btn {
     display: flex;
@@ -29,9 +30,10 @@
     outline: none;
     font-size: 45px;
     font-weight: 100;
-    background: rgb(188, 228, 222);
+    background: #252525;
     cursor: pointer;
-    /* border: 1px solid gray; */
+    border: none;
+    color: #9C9C9C;
 }
 .button-wrapper {
     width: 65vw;
@@ -45,5 +47,5 @@
   }
   .grow:hover {
     transform: scale(1.1);
-    border: 3px solid lightgray;
+    border: 2px solid rgb(121, 13, 13);
   }

@@ -94,7 +94,6 @@ export class Learner extends Component {
           </form>
           {tagMap}
         </div>
-
       </div>
     );
   }
