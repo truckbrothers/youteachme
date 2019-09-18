@@ -123,7 +123,7 @@ class Chat extends Component {
                     <button
                         onClick={this.sendMessage}
                     >
-                        test
+                        send
                     </button>
                 </div>
             </div>

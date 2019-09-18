@@ -70,7 +70,10 @@ export class Learner extends Component {
       )
     const languageMap = this.state.languages.map(el => 
       <>{(this.state.tags.includes(el.language_id) === false ? (
-        <option onClick={() => this.handleLanguage(el)} key={el.language_id}>{el.language_name}</option>)
+        <button 
+        onClick={() => this.handleLanguage(el)} 
+        // value={el}
+         key={el.language_id}>{el.language_name}</button>)
         :
         null)}
         </>
@@ -89,7 +92,9 @@ export class Learner extends Component {
           <h1>Ask a Mentor</h1>
           <form>
             <textarea onChange={e => this.handleChange(e)} placeholder='Some text...'></textarea>
-            <select>{languageMap}</select>
+            {/* <select onClick={e => this.handleChange(e.value)} > */}
+            {languageMap}
+            {/* </select> */}
             <Button onClick={this.submitRequest} className='submit' type="primary">Submit</Button>
           </form>
           {tagMap}
