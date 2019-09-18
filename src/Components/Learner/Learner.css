@@ -74,11 +74,11 @@ form > button:focus{
 }
 textarea {
   background: #494949;
-  color: #9C9C9C;
+  color: rgb(223, 219, 219);
 }
 body {
   background: #9C9C9C;
 }
 /* h1 {
-  border-bottom: 1px solid #9C9C9C;
+  border-bottom: 1px solid black;
 } */
