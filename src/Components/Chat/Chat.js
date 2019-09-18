@@ -24,8 +24,8 @@ class Chat extends Component {
     sendMessage = (e) => {
         e.preventDefault()
         // const inputValue = e.target.elements.chatInput.value
-        const {username, user_id} = this.props
-        const {chat_id} = this.state
+        const { username, user_id } = this.props
+        const { chat_id } = this.state
 
         socket.emit('send message', {
             message_text: this.state.message,
@@ -34,6 +34,9 @@ class Chat extends Component {
             user_id: user_id,
             createdAt: moment().startOf('minute').fromNow()
         })
+        this.setState({
+            message: ''
+        })
     }
     componentDidMount() {
         socket.on('room joined', data => {
@@ -41,7 +44,7 @@ class Chat extends Component {
 
             // })
         })
-        socket.emit('join room', this.props.match.params.chat_id )
+        socket.emit('join room', this.props.match.params.chat_id)
         socket.on('get existing messages', this.props.match.params.chat_id)
         // console.log('do you even mount?')
         // console.log(this.socket)
@@ -57,16 +60,16 @@ class Chat extends Component {
         socket.on('message sent', data => {
             // console.log('hit function')
             // console.log('in socket:',data)
-            if (!data) {console.log('problem')}
-        
+            if (!data) { console.log('problem') }
+
             // take the data object and set state
-        
+
             this.setState({
-        
+
                 messages: data.messages
-        
+
             })
-        
+
         });
         // socket.on('message sent', data => {
         //     if (!data) {console.log('prob')}
@@ -75,7 +78,7 @@ class Chat extends Component {
         //         messages:data
         //     })
         // })
-        
+
     }
 
     handleChange = e => {
@@ -86,13 +89,15 @@ class Chat extends Component {
     render() {
         const messageMap = this.state.messages.map((el, i) => (
             <div
-            className={el.user_id === this.props.user_id ? (`left`):(`right`)}
-            key={el.message_id}
+                className={el.user_id === this.props.user_id ? (`left`) : (`right`)}
+                key={el.message_id}
             >
                 <div
-                className={`${el.user_id === this.props.user_id ? (`left`):(`right`)} text`}
+                    className={`${el.user_id === this.props.user_id ? (`left`) : (`right`)} text`}
                 >
-                    {el.message_text}
+                    <p className='message-text'>
+                        {el.message_text}
+                    </p>
                 </div>
             </div>
         ))
@@ -100,19 +105,26 @@ class Chat extends Component {
         return (
             <div className="Chat">
                 {/* <Nav /> */}
-                <h1 onClick={() => console.log(this.state)}>CHAT {this.props.username}</h1>
-                <input 
-                onChange={e => this.handleChange(e)} 
-                onSubmit={this.sendMessage} 
+                {/* <h1 onClick={() => console.log(this.state)}>CHAT {this.props.username}</h1> */}
+                {/* <p onClick={this.tester}>test</p> */}
+                <div className='container-container'>
+                    <div className='message-container'>
+                        {messageMap}
+                    </div>
+                </div>
+                <div className="chat-input-container">
+                <textarea
+                    placeholder="new message"
 
-                className="chat-form"/>
-                <button
-                onClick={this.sendMessage} 
-                
-                >test</button>
-                <p onClick={this.tester}>test</p>
-                <div className='message-container'>
-                {messageMap}
+                    onChange={e => this.handleChange(e)}
+                    onSubmit={this.sendMessage}
+                    value={this.state.message}
+                    className="chat-form" />
+                    <button
+                        onClick={this.sendMessage}
+                    >
+                        test
+                    </button>
                 </div>
             </div>
         )
@@ -120,7 +132,7 @@ class Chat extends Component {
 }
 function mapStateToProps(reduxState) {
     const { user_id, username, user_image } = reduxState
-    return { user_id, username, user_image}
+    return { user_id, username, user_image }
 }
 
 export default connect(mapStateToProps, null)(withRouter(Chat))

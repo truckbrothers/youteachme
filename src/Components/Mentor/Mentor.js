@@ -19,15 +19,17 @@ export class Mentor extends Component {
             .then(request => this.setState({ requests: request.data }))
             .catch(err => console.log(`couldn't get requests`))
     }
+
     componentDidMount() {
         this.getRequests()
     }
     render() {
         const requestsMap = this.state.requests.map(((el, i) => (
             <Request
-                key={el.request_id}
-                request_info={el.request_info}
-                id={el.chat_id}
+            key={el.request_id}
+            request_info={el.request_info}
+            id={el.chat_id}
+            request_id={el.request_id}
             />
         )))
         return (

@@ -14,6 +14,7 @@ export class Learner extends Component {
     this.state = {
       request: '',
       tags: [],
+      tagNames: [],
       languages: []
 
     };
@@ -42,19 +43,38 @@ export class Learner extends Component {
       request: e.target.value
     })
   }
-  handleLanguage = id => {
-    if(this.state.tags.includes(id)){
+  handleLanguage = obj => {
+    if(this.state.tags.includes(obj) || this.state.tagNames.includes(obj.language_name)){
       console.log('already selected')
     }
     else{
       this.setState({
-        tags: [...this.state.tags, id]
+        tags: [...this.state.tags, obj.language_id],
+        tagNames: [...this.state.tagNames, obj.language_name]
       })
     }
   }
+  removeTag = i => {
+    const newTags = this.state.tags
+    const newTagNames = this.state.tagNames
+    newTags.splice(i, 1)
+    newTagNames.splice(i,1)
+    this.setState({
+      tags: newTags,
+      tagNames: newTagNames
+    })
+  }
   render() {
+    const tagMap = this.state.tagNames.map((el, i) =>
+      <p onClick={() => this.removeTag(i)}>{el}</p>
+      )
     const languageMap = this.state.languages.map(el => 
-      <option onClick={() => this.handleLanguage(el.language_id)} key={el.language_id}>{el.language_name}</option>
+      <>{(this.state.tags.includes(el.language_id) === false ? (
+        <option onClick={() => this.handleLanguage(el)} key={el.language_id}>{el.language_name}</option>)
+        :
+        null)}
+        </>
+      
     )
     return (
       <div className="learner-section">
@@ -72,6 +92,7 @@ export class Learner extends Component {
             <select>{languageMap}</select>
             <Button onClick={this.submitRequest} className='submit' type="primary">Submit</Button>
           </form>
+          {tagMap}
         </div>
       </div>
     );

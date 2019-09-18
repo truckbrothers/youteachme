@@ -52,25 +52,26 @@ export class Profile extends Component {
     toggleEdit() {
         this.setState({ editImage: !this.state.editImage })
     }
-    handleChange(e, key) {
-        this.setState({
-            [key]: e.target.value
-        })
-    }
-    updateImage() {
-        const { image: user_image } = this.state
-        axios.put(`/users/update-user-image`, { user_image, user_id: this.props.user_id }).then(res => {
-            this.toggleEdit()
-            this.props.setUser({ username: this.props.username, user_id: this.props.user_id, user_image })
-        })
-            .catch(err => {
-                alert('Sorry! Try Updating again.')
-            })
-        this.setState({
-            image: ''
-        })
-    }
+  handleChange(e, key) {
+    this.setState({
+      [key]: e.target.value
+    })
+  }
+  updateImage() {
+    const {image: user_image} = this.state
+    axios.put(`/users/update-user-image`, { user_image, user_id: this.props.user_id }).then(res => {
+      this.toggleEdit()
+      this.props.setUser({username: this.props.username, user_id: this.props.user_id, user_image})
+    })
+      .catch(err => {
+        alert('Sorry! Try Updating again.')
+      })
+    this.setState({
+      image: ''
+    })
+  }
 
+  
     updateMentorStatus = user_id => {
         axios.put(`/users/updated-mentor-status/${user_id}`).then(res => {
             console.log(res.data);
@@ -78,55 +79,80 @@ export class Profile extends Component {
     };
 
     addOrDeleteUserSkill = e => {
-        const { user_id } = this.props;
-        const language_id = e.target.value;
-        const skillsArr = [];
-        axios.get("/mentors/languages").then(res => {
-            //   if user has no saved skills, add selected skill
-            if (res.data.length === 0) {
-                axios.post("/mentors", {
-                    user_id,
-                    language_id
-                }).then(res => {
-                    res.data.map(el => {
-                        console.log(el.language_id)
-                        skillsArr.push(el.language_id)
-                        this.setState({
-                            skills: skillsArr
-                        })
-                    })
+      const { user_id } = this.props;
+      const language_id = e.target.value;
+      const skillsArr = [];
+      axios.get("/mentors/languages").then(res => {
+        //   if user has no saved skills, add selected skill
+        if (res.data.length === 0) {
+          axios.post("/mentors", {
+            user_id,
+            language_id
+          }).then(res => {
+            res.data.map(el => {
+              skillsArr.push(el.language_id)
+              this.setState({
+                skills: skillsArr
+              })
+            })
+          })
+        } 
+        // if user has 1 skill, check if that skill matches selected skill
+        else if (res.data.length === 1) {
+          const foundLanguage = res.data.find(el => {
+            return el.language_id === +language_id
+          })
+          if (foundLanguage) {
+            axios.delete(`/mentors/languages/${foundLanguage.language_id}`).then(res => {
+              this.setState({
+                skills: []
+              })
+            })
+          }
+          else {
+            axios.post("/mentors", {
+              user_id,
+              language_id
+            }).then(res => {
+              res.data.map(el => {
+                skillsArr.push(el.language_id)
+                this.setState({
+                  skills: skillsArr
                 })
-                // if user has 1+ skills, check if user already has selected skill
-            } else {
-                const foundLanguage = res.data.find(el => {
-                    // if user has selected skill, delete that skill from db
-                    return el.language_id === +language_id;
-                });
-                if (foundLanguage) {
-                    axios.delete(`/mentors/languages/${foundLanguage.language_id}`).then(res => {
-                        console.log(res.data)
-                        res.data.map(el => {
-                            skillsArr.push(el.language_id)
-                            this.setState({
-                                skills: skillsArr
-                            })
-                        })
-                    });
-                } else {
-                    axios.post("/mentors", {
-                        user_id,
-                        language_id
-                    }).then(res => {
-                        res.data.map(el => {
-                            skillsArr.push(el.language_id)
-                            this.setState({
-                                skills: skillsArr
-                            })
-                        })
-                    })
-                }
-            }
-        });
+              })
+            })
+          }
+        }
+        // if user has 2+ skills, check if user already has selected skill
+        else {
+          const foundLanguage = res.data.find(el => {
+            // if user has selected skill, delete that skill from db
+            return el.language_id === +language_id;
+          });
+          if (foundLanguage) {
+            axios.delete(`/mentors/languages/${foundLanguage.language_id}`).then(res => {
+              res.data.map(el => {
+                skillsArr.push(el.language_id)
+                this.setState({
+                  skills: skillsArr
+                })
+              })
+            });
+          } else {
+            axios.post("/mentors", {
+              user_id,
+              language_id
+            }).then(res => {
+              res.data.map(el => {
+                skillsArr.push(el.language_id)
+                this.setState({
+                  skills: skillsArr
+                })
+              })
+            })
+          }
+        }
+      });
     };
 
     render() {
