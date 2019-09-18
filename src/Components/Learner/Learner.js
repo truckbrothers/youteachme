@@ -94,8 +94,9 @@ export class Learner extends Component {
         </div>
         <div className='learn-container'>
           <h1>Ask a Mentor</h1>
+          <hr></hr>
           <form>
-            <textarea onChange={e => this.handleChange(e)} placeholder='Some text...'></textarea>
+            <textarea onChange={e => this.handleChange(e)} placeholder='Ask away...'></textarea>
             <div className='learner-language-container'>
               {languageMap}
             </div>
