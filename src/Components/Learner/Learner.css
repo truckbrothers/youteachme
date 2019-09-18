@@ -79,6 +79,12 @@ textarea {
 body {
   background: #9C9C9C;
 }
-/* h1 {
-  border-bottom: 1px solid black;
+/* .clicked-language {
+  background: red;
 } */
+.learner-language-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
