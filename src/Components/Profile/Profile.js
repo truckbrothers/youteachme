@@ -11,7 +11,7 @@ export class Profile extends Component {
   constructor() {
     super();
     this.state = {
-      mentorStatus: "",
+      mentorStatus: false,
       loading: false,
       skills: [],
       editImage: false,
@@ -25,6 +25,16 @@ export class Profile extends Component {
         if (res.data.user) {
           const { username, user_image, user_id } = res.data.user;
           this.props.setUser({ username, user_image, user_id });
+          axios.get(`/users/mentor-status/${this.props.user_id}`)
+          .then(res => {
+              console.log(res.data[0].mentor_status)
+              this.setState({
+                  mentorStatus: res.data[0].mentor_status
+              })
+          })
+          .catch(err => {
+              console.log(err)
+          })
         }
       })
       .catch(err => {
@@ -33,6 +43,7 @@ export class Profile extends Component {
     axios
       .get(`/users/mentor-status/${this.props.user_id}`)
       .then(res => {
+        console.log(res.data[0].mentor_status)
         this.setState({
           mentorStatus: res.data[0].mentor_status
         });
@@ -242,7 +253,7 @@ export class Profile extends Component {
                       "success"
                     );
                     this.updateMentorStatus(this.props.user_id);
-                    setTimeout(() => window.location.reload(), 10000);
+                    setTimeout(() => window.location.reload(), 4000);
                   }
                 })
               }
