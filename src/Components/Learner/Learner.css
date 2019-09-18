@@ -79,3 +79,6 @@ textarea {
 body {
   background: #9C9C9C;
 }
+.clicked-language {
+  background: red;
+}
