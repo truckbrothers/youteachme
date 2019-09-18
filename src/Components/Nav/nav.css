@@ -60,6 +60,7 @@
     border-radius: 50px;
     z-index: 3;
     position: relative;
+    object-fit: cover;
   }
 .dark.nav-links-hidden {
     display: hidden;
