@@ -121,10 +121,11 @@ export class Learner extends Component {
             // onClick={() => this.props.history.push('/mentor')}
           >Mentor</span>
         </div>
-        <div className='message-container'>
+        <div className='learn-container'>
           <h1>Ask a Mentor</h1>
+          <hr></hr>
           <form>
-            <textarea onChange={e => this.handleChange(e)} placeholder='Some text...'></textarea>
+            <textarea onChange={e => this.handleChange(e)} placeholder='Ask away...'></textarea>
             <div className='learner-language-container'>
               {languageMap}
             </div>
