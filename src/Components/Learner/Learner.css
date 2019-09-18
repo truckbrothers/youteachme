@@ -70,4 +70,12 @@ form > button:focus{
   border-radius: 3px;
   cursor: pointer;
   outline: none;
+  background: #9C9C9C;
+}
+textarea {
+  background: #494949;
+  color: #9C9C9C;
+}
+body {
+  background: #9C9C9C;
 }
