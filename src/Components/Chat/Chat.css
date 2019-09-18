@@ -1,13 +1,17 @@
 .Chat {
-    height: 90vh;
+    height: 100vh;
     text-align: center;
+    overflow: auto;
+    background-image: linear-gradient(#494949, #494949, #494949,#252525);
 }
 
 .left.text {
     background: skyblue;
     min-width: 100px;
     border: none;
-    width: min-content 
+    width: min-content;
+    background: #725ac1;
+
 }
 
 .left {
@@ -26,7 +30,8 @@
     text-align: end;
     /* position: absolute; */
     /* right: 0; */
-    width: min-content 
+    width: min-content ;
+    background: #725ac1;
 }
 .right {
     display: flex;
