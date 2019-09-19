@@ -1,5 +1,5 @@
 .l-learner {
-    border-bottom: 1px solid #725ac1;
+    border-bottom: 1px solid #790D0D;
     font-size: 30px;
   }
   .l-mentor {
@@ -7,7 +7,7 @@
     cursor: pointer;
   }
   .l-mentor:hover {
-    color: #725ac1;;
+    color: #790D0D;
     font-size: 25px;
     transition: all 0.2s ease-in-out;
   }
@@ -16,17 +16,16 @@
     cursor: pointer;
   }
   .m-learner:hover {
-    color: #725ac1;;
+    color: #790D0D;
     font-size: 25px;
     transition: all 0.2s ease-in-out;
   }
   .m-mentor {
-    border-bottom: 1px solid #725ac1;
+    border-bottom: 1px solid #790D0D;
     font-size: 30px;
   }
   .header {
     height: 90px;
-    /* border-bottom: 1px solid gray; */
     display: flex;
     justify-content: center;
     align-items: center;
