@@ -239,7 +239,7 @@ export class Profile extends Component {
               </button>
             </div>
           </div>
-          {this.props.username}
+          <span className="username-text">{this.props.username}</span>
         </div>
         {this.state.mentorStatus === false ? (
           <div className="learner-view">
