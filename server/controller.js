@@ -127,5 +127,16 @@ module.exports = {
         catch(err) {
             res.status(500).send(`Failed to delete`)
         }
+    },
+    getRequestInfo: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            const {chat_id} = req.params
+            const request_info = await db.find_info([chat_id])
+            res.status(200).send(request_info)
+        }
+        catch(err) {
+            res.status(500).send(`couldn't get request info: ${err}`)
+        }
     }
 }
