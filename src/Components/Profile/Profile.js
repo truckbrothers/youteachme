@@ -40,17 +40,17 @@ export class Profile extends Component {
       .catch(err => {
         alert(`couldn't find user info`, err);
       });
-    axios
-      .get(`/users/mentor-status/${this.props.user_id}`)
-      .then(res => {
-        console.log(res.data[0].mentor_status)
-        this.setState({
-          mentorStatus: res.data[0].mentor_status
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // axios
+    //   .get(`/users/mentor-status/${this.props.user_id}`)
+    //   .then(res => {
+    //     console.log(res.data[0].mentor_status)
+    //     this.setState({
+    //       mentorStatus: res.data[0].mentor_status
+    //     });
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
     const skillsArr = [];
     axios.get("/mentors/languages").then(res => {
       res.data.map(el => {
@@ -61,6 +61,24 @@ export class Profile extends Component {
       });
     });
   }
+
+  componentDidUpdate(prevState) {
+    if (this.state.mentor_status !== prevState.mentor_status) {
+      axios
+      .get(`/users/mentor-status/${this.props.user_id}`)
+      .then(res => {
+        console.log(res.data[0].mentor_status)
+        this.setState({
+          mentorStatus: res.data[0].mentor_status
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
+   
+  }
+
   toggleEdit() {
     this.setState({ editImage: !this.state.editImage });
   }
@@ -95,6 +113,10 @@ export class Profile extends Component {
   updateMentorStatus = user_id => {
     axios.put(`/users/updated-mentor-status/${user_id}`).then(res => {
       console.log(res.data);
+      this.setState({
+        mentorStatus: true
+      })
+
     });
   };
 
@@ -197,11 +219,10 @@ export class Profile extends Component {
               src={this.props.user_image}
               alt="profile-pic"
             />
-            <p onClick={() => this.toggleEdit()} class="text">
+            <p onClick={() => this.toggleEdit()} className="text">
               Edit Photo
             </p>
           </div>
-          {/* <button onClick={() => this.toggleEdit()}>Update Image</button> */}
           <div className="edit-image-section" style={editStyle}>
             <input
               type="text"
@@ -220,20 +241,12 @@ export class Profile extends Component {
           </div>
           {this.props.username}
         </div>
-        {this.state.loading ? (
-          <div className="loading-spinner">
-            <img
-              src="https://icon-library.net//images/spinner-icon-gif/spinner-icon-gif-1.jpg"
-              width="150"
-            />
-          </div>
-        ) : null}
         {this.state.mentorStatus === false ? (
           <div className="learner-view">
             <span>Thinking of Mentoring?</span>
             <Button
               className='profile-mentor-check-button grow'
-              onClick={() =>
+              onClick={async () =>
                 Swal.fire({
                   title: "Are you sure?",
                   text: "Mentoring is for experts only!",
@@ -244,16 +257,12 @@ export class Profile extends Component {
                   confirmButtonText: "Yes, I wanna mentor!"
                 }).then(result => {
                   if (result.value) {
-                    this.setState({
-                      loading: true
-                    });
                     Swal.fire(
                       "You're a mentor!",
                       "Be sure to select some skills.",
                       "success"
                     );
                     this.updateMentorStatus(this.props.user_id);
-                    setTimeout(() => window.location.reload(), 4000);
                   }
                 })
               }

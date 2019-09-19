@@ -1,6 +1,7 @@
 .profile-page {
     background: linear-gradient(#9c9c9c, #757575, #525151,#252525);
     height: 100vh;
+    overflow: auto;
 }
 .general-section{
     display:flex;
