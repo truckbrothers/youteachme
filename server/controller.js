@@ -138,5 +138,16 @@ module.exports = {
         catch(err) {
             res.status(500).send(`couldn't get request info: ${err}`)
         }
+    },
+    getMessages: async (req, res) => {
+        try {
+            const db = req.app.get('db')
+            const {chat_id} = req.params
+            const messages = await db.find_messages([chat_id])
+            res.status(200).send(messages)
+        }
+        catch(err) {
+            res.status(500).send(`couldn't get messages: ${err}`)
+        }
     }
 }

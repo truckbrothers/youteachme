@@ -20,13 +20,17 @@ class Chat extends Component {
             info: ''
         }
         this.socket = io.connect(':5309')
-        // socketIOClient()
-        // this.socket.on('david test', data => console.log(data))
+        socket.on('message sent', data => {
+            if (!data) { console.log('problem') }
+            this.setState({
+                messages: data.messages
+            })
+            this.scrollToBottom()
+        });
     }
     getInfo = () => {
         axios.get(`/request/info/${this.props.match.params.chat_id}`)
             .then(info => {
-                console.log(info.data)
                 this.setState({
                     info: info.data[0].request_info
                 })
@@ -34,7 +38,6 @@ class Chat extends Component {
     }
     sendMessage = (e) => {
         e.preventDefault()
-        // const inputValue = e.target.elements.chatInput.value
         const { username, user_id } = this.props
 
         socket.emit('send message', {
@@ -50,54 +53,28 @@ class Chat extends Component {
             scrollBottom: true
         })
     }
+    getMessages = () => {
+        axios.get(`/messages/${this.props.match.params.chat_id}`)
+            .then(messages => {
+                this.setState({
+                    messages:messages.data
+                })
+            })
+            .catch(err => console.log(`couldn't get messages ${err}`))
+    }
     componentDidMount() {
         this.getInfo()
+        this.getMessages()
         socket.on('room joined', data => {
-            // this.setState({
-
-            // })
         })
         socket.emit('join room', this.props.match.params.chat_id)
         socket.on('get existing messages', this.props.match.params.chat_id)
-        // console.log('do you even mount?')
-        // console.log(this.socket)
-        // this.socket.io('get existing messages', messages => {
-        //     console.log(messages)
-        //     console.log('????')
-        //     if (!messages) {console.log('problemo')}
-
-        //     this.setState({
-        //         messages: messages
-        //     })
-        // })
-        socket.on('message sent', data => {
-            // console.log('hit function')
-            // console.log('in socket:',data)
-            if (!data) { console.log('problem') }
-
-            // take the data object and set state
-
-            this.setState({
-
-                messages: data.messages
-
-            })
-            this.scrollToBottom()
-
-        });
-        // socket.on('message sent', data => {
-        //     if (!data) {console.log('prob')}
-
-        //     this.setState({
-        //         messages:data
-        //     })
-        // })
-
-    }
-    scrollToBottom =() => {
-
-        this.el.scrollIntoView({ behavior: 'smooth'})
-        // this.setState({scrollBottom: false})
+            }
+            
+            scrollToBottom =() => {
+                if(this.el) {
+                    this.el.scrollIntoView({ behavior: 'smooth'})
+                }
     }
 
     handleChange = e => {
@@ -107,6 +84,8 @@ class Chat extends Component {
     }
     render() {
         const messageMap = this.state.messages.map((el, i) => (
+            el.message_text.includes('@@@') !== true ?
+            (
             <div
                 className={el.user_id === this.props.user_id ?   (`right`):(`left`)}
                 key={el.message_id}
@@ -118,22 +97,32 @@ class Chat extends Component {
                         {el.message_text}
                     </p>
                 </div>
-            </div>
+            </div>)
+            :
+            (<div
+                className={`${el.user_id === this.props.user_id ?   (`right`):(`left`)} code-message`}
+                key={el.message_id}
+            >
+                <div
+                    className={`${el.user_id === this.props.user_id ? (`right`):(`left`)} text code-message`}
+                >
+                    <pre className='message-text code-message'>
+                        {el.message_text.replace('@@@', '')}
+                    </pre>
+                </div>
+            </div>)
         ))
-        // console.log(this.state.messages)
         return (
             <div className="Chat">
-                {/* <Nav /> */}
-                {/* <h1 onClick={() => console.log(this.state)}>CHAT {this.props.username}</h1> */}
-                {/* <p onClick={this.tester}>test</p> */}
                 <div className='container-container'>
-                        <div className="request-info">
+                        <div onClick={this.getMessages} className="request-info">
                             {this.state.info}
                         </div>
                     <div className='message-container'>
                         {messageMap}
                     </div>
                 </div>
+                <button className="exit-chat" onClick={() => this.props.history.goBack()}>Exit</button>
                 <div className="chat-input-container">
                 <textarea
                     placeholder="new message"
@@ -149,9 +138,7 @@ class Chat extends Component {
                         send
                     </button>
                 </div>
-                {/* {this.state.scrollBottom === true ?  */}
                 <div  ref={el => {this.el = el}} ></div>
-                {/* // :null} */}
             </div>
         )
     }

@@ -19,7 +19,7 @@ CREATE TABLE mentors(
 CREATE TABLE request(
     request_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(user_id),
-    request_info VARCHAR(250)
+    request_info VARCHAR(2500)
 );
 
 CREATE TABLE request_tags(
@@ -30,7 +30,7 @@ CREATE TABLE request_tags(
 CREATE TABLE chat(
     chat_id SERIAL PRIMARY KEY,
     request_id INT REFERENCES request(request_id),
-    title VARCHAR(250)
+    title VARCHAR(2500)
 );
 
 CREATE TABLE chat_users(
