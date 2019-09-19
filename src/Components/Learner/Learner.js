@@ -104,7 +104,7 @@ export class Learner extends Component {
     return (
       <div className="learner-section">
         <div className='header'>
-          <span className='l-learner'>Learner</span>
+          <span className='l-learner'>Learn</span>
           {this.state.mentorStatus === false ? (
           <span
             className='l-mentor'
