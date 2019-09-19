@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 import socket from '../../sockets'
 import './Chat.css'
+import axios from 'axios'
 // import socketIOClient from 'socket.io-client'
 
 
@@ -15,17 +16,26 @@ class Chat extends Component {
         this.state = {
             messages: [],
             message: '',
+            scrollBottom: false,
+            info: ''
         }
         this.socket = io.connect(':5309')
         // socketIOClient()
         // this.socket.on('david test', data => console.log(data))
     }
-
+    getInfo = () => {
+        axios.get(`/request/info/${this.props.match.params.chat_id}`)
+            .then(info => {
+                console.log(info.data)
+                this.setState({
+                    info: info.data[0].request_info
+                })
+            })
+    }
     sendMessage = (e) => {
         e.preventDefault()
         // const inputValue = e.target.elements.chatInput.value
         const { username, user_id } = this.props
-        const { chat_id } = this.state
 
         socket.emit('send message', {
             message_text: this.state.message,
@@ -33,12 +43,15 @@ class Chat extends Component {
             chat_id: this.props.match.params.chat_id,
             user_id: user_id,
             createdAt: moment().startOf('minute').fromNow()
-        })
+        }
+        )
         this.setState({
-            message: ''
+            message: '',
+            scrollBottom: true
         })
     }
     componentDidMount() {
+        this.getInfo()
         socket.on('room joined', data => {
             // this.setState({
 
@@ -69,6 +82,7 @@ class Chat extends Component {
                 messages: data.messages
 
             })
+            this.scrollToBottom()
 
         });
         // socket.on('message sent', data => {
@@ -80,6 +94,11 @@ class Chat extends Component {
         // })
 
     }
+    scrollToBottom =() => {
+
+        this.el.scrollIntoView({ behavior: 'smooth'})
+        // this.setState({scrollBottom: false})
+    }
 
     handleChange = e => {
         this.setState({
@@ -89,11 +108,11 @@ class Chat extends Component {
     render() {
         const messageMap = this.state.messages.map((el, i) => (
             <div
-                className={el.user_id === this.props.user_id ? (`left`) : (`right`)}
+                className={el.user_id === this.props.user_id ?   (`right`):(`left`)}
                 key={el.message_id}
             >
                 <div
-                    className={`${el.user_id === this.props.user_id ? (`left`) : (`right`)} text`}
+                    className={`${el.user_id === this.props.user_id ? (`right`):(`left`)} text`}
                 >
                     <p className='message-text'>
                         {el.message_text}
@@ -108,6 +127,9 @@ class Chat extends Component {
                 {/* <h1 onClick={() => console.log(this.state)}>CHAT {this.props.username}</h1> */}
                 {/* <p onClick={this.tester}>test</p> */}
                 <div className='container-container'>
+                        <div className="request-info">
+                            {this.state.info}
+                        </div>
                     <div className='message-container'>
                         {messageMap}
                     </div>
@@ -121,11 +143,15 @@ class Chat extends Component {
                     value={this.state.message}
                     className="chat-form" />
                     <button
+                        className="chat-send"
                         onClick={this.sendMessage}
                     >
                         send
                     </button>
                 </div>
+                {/* {this.state.scrollBottom === true ?  */}
+                <div  ref={el => {this.el = el}} ></div>
+                {/* // :null} */}
             </div>
         )
     }

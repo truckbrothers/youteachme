@@ -1,4 +1,4 @@
-SELECT r.request_id, c.chat_id, r.request_info, r.user_id FROM request r
+SELECT DISTINCT r.request_id, c.chat_id, r.request_info, r.user_id FROM request r
 JOIN request_tags rq
 ON rq.request_id = r.request_id
 JOIN chat c
