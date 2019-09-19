@@ -18,7 +18,8 @@
 .left {
     text-align: start;
     display:flex;
-    justify-content: flex-start
+    justify-content: flex-start;
+    width:100%;
 }
 
 .right.text {
