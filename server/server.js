@@ -15,6 +15,7 @@ const ssl = require('./socketsController')
 const app = express();
 
 app.use(express.json());
+app.use(express.static(`${__dirname}/../build`));
 
 // Sessions
 app.use(session({
