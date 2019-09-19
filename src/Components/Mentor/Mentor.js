@@ -26,10 +26,10 @@ export class Mentor extends Component {
     render() {
         const requestsMap = this.state.requests.map(((el, i) => (
             <Request
-            key={el.request_id}
-            request_info={el.request_info}
-            id={el.chat_id}
-            request_id={el.request_id}
+                key={el.request_id}
+                request_info={el.request_info}
+                id={el.chat_id}
+                request_id={el.request_id}
             />
         )))
         return (

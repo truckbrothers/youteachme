@@ -36,6 +36,7 @@
     height: 100vh;
     /* background: linear-gradient(#9c9c9c, #757575, #525151,#252525); */
     background-image: linear-gradient(#494949, #494949, #494949,#252525);
+    overflow: auto;
   }
   h1 {
     font-weight: 400;

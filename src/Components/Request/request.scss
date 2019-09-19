@@ -1,60 +1,130 @@
+// .request-container {
+//   padding: 10px 20px 25px 20px;
+// 	width: 50vw;
+// 	border: 1px solid rgb(94, 84, 84);
+// 	min-height: 50px;
+// 	box-shadow: 5px 5px 5px darkgray;
+// 	background: rgb(255, 254, 254);
+//   border-radius: 5px;
+//   cursor: pointer;
+// }
+// .request-wrapper {
+// 	display: flex;
+// 	justify-content: center;
+// 	align-items: center;
+// }
+// .request-text {
+// 	text-overflow: ellipsis;
+// 	display: block;
+// 	width: 50vw;
+// 	min-height: 100px;
+// 	// cursor: pointer;
+// }
+// .answer-btn {
+//   position: absolute;
+//   height: 30px;
+//   border-radius: 2px;
+//   right: 25%;
+//   cursor: pointer;
+// }
+// .answer-btn:hover {
+//   background: #790D0D;
+//   cursor: pointer;
+//   color: white;
+//   border-radius: 2px;
+// }
+
+// @mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
+//   overflow: hidden;
+//   position: relative;
+//   line-height: $lineHeight;
+//   text-align: justify;
+//   margin-right: -1em;
+//   padding-right: 1em;
+//   &:before {
+//     content: '...';
+//     position: absolute;
+//     right: 0;
+//     bottom: 0;
+//   }
+//   &:after {
+//     content: '';
+//     // position: absolute;
+//     right: 0;
+//     width: 1em;
+//     // height: 1em;
+//     margin-top: 0.2em;
+//     background: $bgColor;
+//   }
+// }
+
+// .block-with-text {
+//   @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3, $bgColor: white);  
+// }
 .request-container {
   padding: 10px 20px 25px 20px;
-	width: 50vw;
-	border: 1px solid rgb(94, 84, 84);
-	min-height: 50px;
-	box-shadow: 5px 5px 5px darkgray;
-	background: rgb(255, 254, 254);
-  border-radius: 5px;
-  cursor: pointer;
+    width: 50vw;
+    border: 1px solid rgb(94, 84, 84);
+    min-height: 50px;
+    box-shadow: 5px 5px 5px rgb(125, 120, 120);
+    background: rgb(189, 188, 188);
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 30px;
 }
 .request-wrapper {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .request-text {
-	text-overflow: ellipsis;
-	display: block;
-	width: 50vw;
-	min-height: 50px;
-	// cursor: pointer;
+    // text-overflow: ellipsis;
+    display: block;
+    width: 50vw;
+    min-height: 50px;
+    // cursor: pointer;
 }
 .answer-btn {
-  position: absolute;
-  right: 25%;
+  position: relative;
+  right: -45%;
   cursor: pointer;
+  background: transparent;
+  color: #252525;
+  border: 1px solid #252525;
+  border-radius: 2px;
+  height: 21px;
 }
 .answer-btn:hover {
-  background: #1890FF;
+  background: #790D0D;
+  cursor: pointer;
   color: white;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
-@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
-  overflow: hidden;
-  position: relative;
-  line-height: $lineHeight;
-  text-align: justify;
-  margin-right: -1em;
-  padding-right: 1em;
-  &:before {
-    content: '...';
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-  &:after {
-    content: '';
-    // position: absolute;
-    right: 0;
-    width: 1em;
-    // height: 1em;
-    margin-top: 0.2em;
-    background: $bgColor;
-  }
-}
+// @mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
+//   overflow: hidden;
+//   position: relative;
+//   line-height: $lineHeight;
+//   text-align: justify;
+//   margin-right: -1em;
+//   padding-right: 1em;
+//   &:before {
+//     content: '...';
+//     position: absolute;
+//     right: 0;
+//     bottom: 0;
+//   }
+//   &:after {
+//     content: '';
+//     // position: absolute;
+//     right: 0;
+//     width: 1em;
+//     // height: 1em;
+//     margin-top: 0.2em;
+//     background: $bgColor;
+//   }
+// }
 
-.block-with-text {
-  @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3, $bgColor: white);  
-}
+// .block-with-text {
+//   @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3, $bgColor: white);  
+// }

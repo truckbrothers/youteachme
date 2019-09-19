@@ -138,7 +138,7 @@ export class Learner extends Component {
           <h1>Ask a Mentor</h1>
           <hr></hr>
           <form>
-            <textarea onChange={e => this.handleChange(e)} placeholder='Ask away...'></textarea>
+            <textarea onChange={e => this.handleChange(e)} placeholder='Prefix @@@ on any code to maintain formatting...'></textarea>
             <div className='learner-language-container'>
               {languageMap}
             </div>
