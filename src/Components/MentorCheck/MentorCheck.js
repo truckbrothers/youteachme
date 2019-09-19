@@ -26,13 +26,24 @@ export class MentorCheck extends Component {
             })
     }
 
-
+    updateMentorStatus = user_id => {
+        axios.put(`/users/updated-mentor-status/${user_id}`).then(res => {
+            console.log(res.data);
+        });
+    };
 
     render() {
         return (
             <div className='wrapper'>
                 <div className='container'>Would you like to:</div>
+                <hr></hr>
                 <div className='button-wrapper'>
+                    <Button
+                        onClick={() => this.props.history.push('/learner')}
+                        type="primary"
+                        className='mentor-check-btn grow'>
+                        Learn
+                    </Button>
                     <Button
                         onClick={this.state.mentorStatus ? () => this.props.history.push('/mentor') :
                             () => Swal.fire({
@@ -50,6 +61,7 @@ export class MentorCheck extends Component {
                                         'Be sure to select some skills.',
                                         'success'
                                     )
+                                    this.updateMentorStatus(this.props.user_id);
                                     this.props.mentorToggle()
                                     this.props.history.push('/profile')
                                 }
@@ -58,12 +70,6 @@ export class MentorCheck extends Component {
                         type="primary"
                         className='mentor-check-btn grow'>
                         Mentor
-                    </Button>
-                    <Button
-                        onClick={() => this.props.history.push('/learner')}
-                        type="primary"
-                        className='mentor-check-btn grow'>
-                        Learn
                     </Button>
                 </div>
             </div>

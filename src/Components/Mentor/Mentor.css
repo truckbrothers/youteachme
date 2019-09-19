@@ -1,13 +1,14 @@
 .l-learner {
-    border-bottom: 1px solid #725ac1;
+    border-bottom: 1px solid #790D0D;
     font-size: 30px;
   }
   .l-mentor {
     opacity: .5;
     cursor: pointer;
+    color: #9C9C9C;
   }
   .l-mentor:hover {
-    color: #725ac1;;
+    color: #790D0D;
     font-size: 25px;
     transition: all 0.2s ease-in-out;
   }
@@ -16,19 +17,35 @@
     cursor: pointer;
   }
   .m-learner:hover {
-    color: #725ac1;;
+    color: #790D0D;
     font-size: 25px;
     transition: all 0.2s ease-in-out;
   }
   .m-mentor {
-    border-bottom: 1px solid #725ac1;
+    border-bottom: 1px solid #790D0D;
     font-size: 30px;
+    color: #9C9C9C;
   }
   .header {
     height: 90px;
-    /* border-bottom: 1px solid gray; */
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  
+  .mentor-section {
+    height: 100vh;
+    /* background: linear-gradient(#9c9c9c, #757575, #525151,#252525); */
+    background-image: linear-gradient(#494949, #494949, #494949,#252525);
+  }
+  h1 {
+    font-weight: 400;
+    margin-bottom: 0px;
+  }
+  hr {
+    width: 67%;
+    margin-bottom: 60px;
+    border-color: #790D0D;
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #790D0D, rgba(0, 0, 0, 0));
+  }

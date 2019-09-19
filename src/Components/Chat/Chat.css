@@ -52,7 +52,6 @@
 
 /* } */
 .message-container {
-    
     overflow: auto;
     display: flex;
 	flex-direction: column;

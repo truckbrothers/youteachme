@@ -6,6 +6,7 @@ import { mentorToggle } from '../../ducks/reducer'
 import { Button } from 'antd';
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
+import Swal from "sweetalert2";
 
 export class Learner extends Component {
   constructor() {
@@ -64,6 +65,13 @@ export class Learner extends Component {
       tagNames: newTagNames
     })
   }
+
+  updateMentorStatus = user_id => {
+    axios.put(`/users/updated-mentor-status/${user_id}`).then(res => {
+      console.log(res.data);
+    });
+  };
+
   render() {
     // const tagMap = this.state.tagNames.map((el, i) =>
     //   <p onClick={() => this.removeTag(i)}>{el}</p>
@@ -86,16 +94,38 @@ export class Learner extends Component {
     return (
       <div className="learner-section">
         <div className='header'>
-          <span className='l-learner'>Learner</span>
+          <span className='l-learner'>Learn</span>
           <span
             className='l-mentor'
-            onClick={() => this.props.history.push('/mentor')}
+            onClick={() =>
+              Swal.fire({
+                title: "Are you sure?",
+                text: "Mentoring is for experts only!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, I wanna mentor!"
+              }).then(result => {
+                if (result.value) {
+                  Swal.fire(
+                    "You're a mentor!",
+                    "Be sure to select some skills.",
+                    "success"
+                  );
+                  this.updateMentorStatus(this.props.user_id);
+                  this.props.history.push('/profile')
+                }
+              })
+            }
+            // onClick={() => this.props.history.push('/mentor')}
           >Mentor</span>
         </div>
-        <div className='message-container'>
+        <div className='learn-container'>
           <h1>Ask a Mentor</h1>
+          <hr></hr>
           <form>
-            <textarea onChange={e => this.handleChange(e)} placeholder='Some text...'></textarea>
+            <textarea onChange={e => this.handleChange(e)} placeholder='Ask away...'></textarea>
             <div className='learner-language-container'>
               {languageMap}
             </div>
