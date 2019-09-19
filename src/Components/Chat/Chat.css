@@ -3,14 +3,15 @@
     text-align: center;
     overflow: auto;
     background-image: linear-gradient(#494949, #494949, #494949,#252525);
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .left.text {
-    background: skyblue;
     min-width: 100px;
     border: none;
     width: min-content;
-    background: #725ac1;
+    background: #9c9c9c;
 
 }
 
@@ -24,18 +25,20 @@
 }
 
 .right.text {
-    background: rgba(255, 166, 0, 0.678);
-    min-width: 50vw;
+    background: #790d0d;
+    color: #9c9c9c;
+    /* min-width: 50vw; */
     border: none;
     text-align: end;
     /* position: absolute; */
     /* right: 0; */
     width: min-content ;
-    background: #725ac1;
+    /* background: #725ac1; */
 }
 .right {
     display: flex;
     justify-content: flex-end;
+    width: 100%;
     /* border: red solid 1px; */
     /* width: 100%; */
     /* text-align: start; */
@@ -57,11 +60,14 @@
 	justify-content: flex-end;
 	align-items: stretch;
     align-content: stretch;
+    margin-bottom: 150px;
+    margin-top: 75px;
+    /* max-height: 80%; */
 }
 .left.text,.right.text {
     min-height: 80px;
     width: inherit;
-    max-width: 50vw;
+    max-width: 35vw;
     border-radius: 15px;
     padding: 15px;
     display: flex;
@@ -72,6 +78,7 @@
     word-wrap: break-word;
     /* overflow-wrap: break-word; */
     /* white-space: pre; */
+    margin: 1px;
 }
 .message-text {
     width: 100%;
@@ -85,7 +92,52 @@
     height: 110px;
     min-height: 100px;
 }
+
+.chat-form:focus {
+    border: 2px solid rgb(121,13,13);
+}
 .chat-input-container {
     display:flex;
     justify-content: flex-start;
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 100%;
+}
+.chat-send {
+    background-color: #252525;
+    border:none;
+    color: #9C9C9C;
+    border-radius: 5px;
+    border: 1.5px solid rgba(0, 0, 0, 0);
+    margin-left: 1px;
+}
+
+.chat-send:hover {
+    border: 1.5px solid rgb(121,13,13);
+    background-color: #131313;
+}
+.bottom-div {
+    position: absolute;
+    bottom: 0;
+}
+
+.request-info {
+    min-width: 100px;
+    /* border: none; */
+    width: min-content;
+    background: #9c9c9c;
+    min-height: 80px;
+    width: inherit;
+    /* max-width: 35vw; */
+    width: calc(100% - 30px);
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-wrap: break-word;
+    margin-top: 75px;
+    margin-left: 1px;
+    /* border: green solid 1px; */
 }

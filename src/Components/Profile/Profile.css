@@ -90,19 +90,12 @@
     border-radius: 5px;
     transition: .25s;
 }
-
-/* .skills-buttons > button:hover {
-    width: 100px;
-    height: 40px;
-} */
-
-
 .selected {
     background: #790d0d;
     color: #c0bbbb;
     border: 1px solid #c0bbbb;
+    border-radius: 2px;
 }
-
 .selected:hover {
     border: 1px solid #c0bbbb;
     cursor: pointer;
@@ -111,8 +104,8 @@
     background: transparent;
     color: #c0bbbb;
     border: 1px solid #c0bbbb;
+    border-radius: 2px;
 }
-
 .unselected:hover {
     border: 1px solid #790d0d;
     color: #d6d2d2;

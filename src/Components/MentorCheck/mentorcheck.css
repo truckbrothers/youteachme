@@ -9,7 +9,7 @@
     font-size: 70px;
     font-weight: 200;
     margin-bottom: -100px;
-    border-bottom: 1px solid gray;
+    /* border-bottom: 1px solid gray; */
 }
 .wrapper {
 	height: 100vh;
@@ -39,6 +39,7 @@
     width: 65vw;
     display: flex;
     flex-direction: row;
+    margin-top: -15%;
     justify-content: space-evenly;
     /* border: 1px solid gray; */
 }
@@ -48,4 +49,13 @@
   .grow:hover {
     transform: scale(1.1);
     border: 2px solid rgb(121, 13, 13);
+  }
+  .wrapper > hr {
+    width: 67%;
+    margin-bottom: 93px;
+    margin-top: -4%;
+    border-color: #790D0D;
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #790D0D, rgba(0, 0, 0, 0));
   }
