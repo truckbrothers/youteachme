@@ -73,7 +73,7 @@ export class Nav extends Component {
 
                         <div className={`nav ${this.state.navHide}`}>
                             <p>{this.props.username}</p>
-                            {this.state.mentorStatus === true ? <Link className="nav-link home-link" to='/mentor' onClick={() => this.setState({ navHide: `nav-links-hidden` })}>Home</Link> : <Link className="nav-link home-link" to='/learner' onClick={() => this.setState({ navHide: `nav-links-hidden` })}>Home</Link> }
+                            <Link className="nav-link home-link" to='/learner' onClick={() => this.setState({ navHide: `nav-links-hidden` })}>Home</Link>
                             <p><Link className="profile-link nav-link" to='/profile' onClick={() => this.setState({ navHide: `nav-links-hidden` })}>Profile</Link></p>
                             <p className="logout nav-link" onClick={this.logout}>Logout</p>
                             <p className="nav-link" onClick={() => this.setState({ navHide: `nav-links-hidden` })}><FontAwesomeIcon icon={faCaretLeft} /> Hide</p>
