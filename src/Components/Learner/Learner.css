@@ -2,10 +2,13 @@
   border-bottom: 1px solid #790D0D;
   font-size: 30px;
   margin-right: 25px;
+  color: #9C9C9C;
+  /* -webkit-text-stroke: .5px #790D0D; */
 }
 .l-mentor {
   opacity: .5;
   cursor: pointer;
+  color: #9C9C9C;
 }
 .l-mentor:hover {
   color: #790D0D;
@@ -15,6 +18,7 @@
 .m-learner {
   opacity: .5;
   cursor: pointer;
+  color: #9C9C9C;
 }
 .m-learner:hover {
   color: #790D0D;
@@ -78,7 +82,8 @@ form > textarea:focus {
 .learner-section {
   /* border: 5px solid red; */
   height: 100vh;
-  background: linear-gradient(#9c9c9c, #757575, #525151,#252525);
+  /* background: linear-gradient(#9c9c9c, #757575, #525151,#252525); */
+  background-image: linear-gradient(#494949, #494949, #494949,#252525);
 }
 form {
   display: flex;
@@ -89,6 +94,7 @@ form {
 h1 {
   font-weight: 400;
   margin-bottom: 0px;
+  color: #9C9C9C;
 }
 hr {
   width: 67%;

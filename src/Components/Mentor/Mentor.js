@@ -38,11 +38,12 @@ export class Mentor extends Component {
                     <span
                         className='m-learner'
                         onClick={() => this.props.history.push('/learner')}
-                    >Learner
+                    >Learn
                     </span>
                     <span className='m-mentor'>Mentor</span>
                 </div>
-                <h1>Mentor Mode</h1>
+                <h1>Mentor Questions</h1>
+                <hr></hr>
                 {requestsMap}
             </div>
         );
