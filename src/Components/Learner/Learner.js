@@ -38,15 +38,14 @@ export class Learner extends Component {
       .catch(err => console.log("couldn't get languages"))
   }
   submitRequest = () => {
-    if (this.state.tags !== [] && this.state.request !== '') {
+    if (this.state.tags.length === 0 || this.state.request === "") {
+    }
+    else {
       axios.post('/request', { user_id: this.props.user_id, request_info: this.state.request, language_id: this.state.tags })
         .then(chat => {
           this.props.history.push(`/chat/${chat.data[0].chat_id}`)
         })
         .catch(err => console.log(`couldn't submit request`))
-    }
-    else {
-      console.log(`make sure you add tags and request information`)
     }
   }
   handleChange = e => {

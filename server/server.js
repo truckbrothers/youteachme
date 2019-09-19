@@ -44,6 +44,7 @@ app.get('/mentors/languages', ctrl.getUserLanguages)
 app.get('/languages', ctrl.getLanguages)
 app.delete('/request/:request_id', ctrl.deleteRequest)
 app.get('/request/info/:chat_id', ctrl.getRequestInfo)
+app.get('/messages/:chat_id', ctrl.getMessages)
 
 
 //  Listener and DB hookup
