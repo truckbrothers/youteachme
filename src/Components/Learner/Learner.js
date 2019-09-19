@@ -38,14 +38,15 @@ export class Learner extends Component {
       .catch(err => console.log("couldn't get languages"))
   }
   submitRequest = () => {
-    if (this.state.tags.length === 0 || this.state.request === "") {
-    }
-    else {
+    if (this.state.tags !== [] && this.state.request !== '') {
       axios.post('/request', { user_id: this.props.user_id, request_info: this.state.request, language_id: this.state.tags })
         .then(chat => {
           this.props.history.push(`/chat/${chat.data[0].chat_id}`)
         })
         .catch(err => console.log(`couldn't submit request`))
+    }
+    else {
+      console.log(`make sure you add tags and request information`)
     }
   }
   handleChange = e => {
@@ -137,7 +138,7 @@ export class Learner extends Component {
           <h1>Ask a Mentor</h1>
           <hr></hr>
           <form>
-            <textarea onChange={e => this.handleChange(e)} placeholder='Prefix @@@ on any code to maintain formatting...'></textarea>
+            <textarea onChange={e => this.handleChange(e)} placeholder='Ask away...'></textarea>
             <div className='learner-language-container'>
               {languageMap}
             </div>
