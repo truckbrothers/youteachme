@@ -16,11 +16,21 @@ export class Learner extends Component {
       request: '',
       tags: [],
       tagNames: [],
-      languages: []
-
+      languages: [],
+      mentorStatus: false
     };
   }
   componentDidMount() {
+    axios.get(`/users/mentor-status/${this.props.user_id}`)
+          .then(res => {
+              console.log('learner', res.data[0].mentor_status)
+              this.setState({
+                  mentorStatus: res.data[0].mentor_status
+              })
+          })
+          .catch(err => {
+              console.log(err)
+          })
     axios.get('/languages')
       .then(languages => this.setState({
         languages: languages.data
@@ -95,6 +105,7 @@ export class Learner extends Component {
       <div className="learner-section">
         <div className='header'>
           <span className='l-learner'>Learn</span>
+          {this.state.mentorStatus === false ? (
           <span
             className='l-mentor'
             onClick={() =>
@@ -119,7 +130,9 @@ export class Learner extends Component {
               })
             }
             // onClick={() => this.props.history.push('/mentor')}
-          >Mentor</span>
+          >Mentor</span>) : (
+            <span className='l-mentor' onClick={() => this.props.history.push('/mentor')}>Mentor</span>
+          )}
         </div>
         <div className='learn-container'>
           <h1>Ask a Mentor</h1>
