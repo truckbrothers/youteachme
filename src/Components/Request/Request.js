@@ -29,8 +29,12 @@ export class Request extends Component {
             <div className='request-wrapper'>
                 <div className='request-container'>
                     <div
-                        onClick={() => this.setState({ toggleInfo: !this.state.toggleInfo })} style={style} className={`request-text ${this.state.toggleInfo ? null : `block-with-text`}`}>
-                        {this.props.request_info}
+                        onClick={() => this.setState({ toggleInfo: !this.state.toggleInfo })} 
+                        style={style} 
+                        className={`request-text ${this.state.toggleInfo ? null : `block-with-text`} `}>
+                        <p className="message-text">
+                            {this.props.request_info}
+                        </p>
                         <div>
                             <button onClick={this.deleteRequest } className='answer-btn'>Answer</button>
                         </div>

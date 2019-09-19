@@ -6,7 +6,6 @@ import moment from 'moment'
 import socket from '../../sockets'
 import './Chat.css'
 import axios from 'axios'
-// import socketIOClient from 'socket.io-client'
 
 
 class Chat extends Component {
@@ -57,7 +56,7 @@ class Chat extends Component {
         axios.get(`/messages/${this.props.match.params.chat_id}`)
             .then(messages => {
                 this.setState({
-                    messages:messages.data
+                    messages: messages.data
                 })
             })
             .catch(err => console.log(`couldn't get messages ${err}`))
@@ -69,12 +68,12 @@ class Chat extends Component {
         })
         socket.emit('join room', this.props.match.params.chat_id)
         socket.on('get existing messages', this.props.match.params.chat_id)
-            }
-            
-            scrollToBottom =() => {
-                if(this.el) {
-                    this.el.scrollIntoView({ behavior: 'smooth'})
-                }
+    }
+
+    scrollToBottom = () => {
+        if (this.el) {
+            this.el.scrollIntoView({ behavior: 'smooth' })
+        }
     }
 
     handleChange = e => {
@@ -85,52 +84,58 @@ class Chat extends Component {
     render() {
         const messageMap = this.state.messages.map((el, i) => (
             el.message_text.includes('@@@') !== true ?
-            (
-            <div
-                className={el.user_id === this.props.user_id ?   (`right`):(`left`)}
-                key={el.message_id}
-            >
-                <div
-                    className={`${el.user_id === this.props.user_id ? (`right`):(`left`)} text`}
+                (
+                    <div
+                        className={el.user_id === this.props.user_id ? (`right`) : (`left`)}
+                        key={el.message_id}
+                    >
+                        <div
+                            className={`${el.user_id === this.props.user_id ? (`right`) : (`left`)} text`}
+                        >
+                            <p className='message-text'>
+                                {el.message_text}
+                            </p>
+                        </div>
+                    </div>)
+                :
+                (<div
+                    className={`${el.user_id === this.props.user_id ? (`right`) : (`left`)} code-message`}
+                    key={el.message_id}
                 >
-                    <p className='message-text'>
-                        {el.message_text}
-                    </p>
-                </div>
-            </div>)
-            :
-            (<div
-                className={`${el.user_id === this.props.user_id ?   (`right`):(`left`)} code-message`}
-                key={el.message_id}
-            >
-                <div
-                    className={`${el.user_id === this.props.user_id ? (`right`):(`left`)} text code-message`}
-                >
-                    <pre className='message-text code-message'>
-                        {el.message_text.replace('@@@', '')}
-                    </pre>
-                </div>
-            </div>)
+                    <div
+                        className={`${el.user_id === this.props.user_id ? (`right`) : (`left`)} text code-message`}
+                    >
+                        <pre className='message-text code-message'>
+                            {el.message_text.replace('@@@', '')}
+                        </pre>
+                    </div>
+                </div>)
         ))
         return (
             <div className="Chat">
                 <div className='container-container'>
-                        <div onClick={this.getMessages} className="request-info">
+                    <div onClick={this.getMessages} className="request-info">
+                        <p className="message-text">
                             {this.state.info}
-                        </div>
+                        </p>
+                    </div>
                     <div className='message-container'>
                         {messageMap}
                     </div>
                 </div>
-                <button className="exit-chat" onClick={() => this.props.history.goBack()}>Exit</button>
+                <button 
+                className="exit-chat" 
+                onClick={() => this.props.history.goBack()}>
+                    Exit
+                    </button>
                 <div className="chat-input-container">
-                <textarea
-                    placeholder="new message"
+                    <textarea
+                        placeholder="Create new message here. Type @@@ to maintain formatting."
 
-                    onChange={e => this.handleChange(e)}
-                    onSubmit={this.sendMessage}
-                    value={this.state.message}
-                    className="chat-form" />
+                        onChange={e => this.handleChange(e)}
+                        onSubmit={this.sendMessage}
+                        value={this.state.message}
+                        className="chat-form" />
                     <button
                         className="chat-send"
                         onClick={this.sendMessage}
@@ -138,7 +143,7 @@ class Chat extends Component {
                         send
                     </button>
                 </div>
-                <div  ref={el => {this.el = el}} ></div>
+                <div ref={el => { this.el = el }} ></div>
             </div>
         )
     }
