@@ -22,13 +22,16 @@
 }
 .answer-btn {
   position: absolute;
+  height: 30px;
+  border-radius: 2px;
   right: 25%;
   cursor: pointer;
 }
 .answer-btn:hover {
-  background: #1890FF;
+  background: #790D0D;
+  cursor: pointer;
   color: white;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 @mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
